@@ -12,16 +12,53 @@
 
 <body>
     <header>
+        <h1>The Ghibli Archive</h1>
+        <nav class="navigation">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="index.html">Films</a></li>
+                <li><a href="/characters/index.html">Characters</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
-        <h1>The Ghibli Archive - Films </h1>
+        <h1>Films</h1>
+        <!--Search Bar-->
+        <div class="search-container">
+            <form action="">
+                <input type="text" placeholder="Search...">
+                <button type="submit">🔎︎</button>
+            </form>
+        </div>
+        <!--Filter Results-->
+        <span id="filterResult">Filter Results:</span>
+        <div id="filterMenu">
+            <button class="filterBtn" id="filter-titleBtn-AZ">Title: A-Z</button>
+            <button class="filterBtn" id="filter-titleBtn-ZA">Title: Z-A</button>
+            <button class="filterBtn" id="filter-rtimeBtn-SL">Running Time: shortest-longest</button>
+            <button class="filterBtn" id="filter-rtBtn-LS">Running Time: longest-shortest</button>
+            <button class="filterBtn" id="filter-dateBtn-ON">Release Date: old-new</button>
+            <button class="filterBtn" id="filter-dateBtn-NO">Release Date: new-old</button>
+            <button class="filterBtn" id="filter-popularityBtn-LH">Popularity: high-low</button>
+            <button class="filterBtn" id="filter-popularityBtn-HL">Popularity: low-high</button>
+        </div>
+        <!--Movie Cards-->
+        <!--Fill with movie cards
+            Template:
+            <div>
+                <img src="" alt="Photo of movie">
+                Details about movie
+                <button>Learm More</button>
+            </div>
+        -->
     </main>
     <footer>
+        <p>The Ghibli Archive</p>
         <p>
             <span id="currentyear"></span>
             &#128059; Shania Esguerra &#128059; Alberta,Canada
+            <span id="lastModified"></span>
         </p>
-        <p id="lastModified"></p>
     </footer>
 </body>
 
