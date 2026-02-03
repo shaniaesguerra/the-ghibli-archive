@@ -1,4 +1,4 @@
-import { renderCharacterTemplate } from "./utils.mjs";
+import { renderWithTemplate } from "./utils.mjs";
 //Get information for Character Cards
 // -- establish utils export function and import it here
 /*

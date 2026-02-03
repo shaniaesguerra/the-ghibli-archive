@@ -1,3 +1,6 @@
+import { loadHeaderFooter } from "./utils.mjs";
+
+loadHeaderFooter();
 //Test: Fetch data (both working)
 /******************************
 Studio Ghibli API
@@ -19,7 +22,7 @@ async function fetchGhibliFilms() {
     }
 }
 
-fetchGhibliFilms();
+//fetchGhibliFilms();
 
 /******************************
 Jikan API
@@ -43,4 +46,4 @@ async function fetchGhibliData() {
     }
 }
 
-fetchGhibliData();
+//fetchGhibliData();
