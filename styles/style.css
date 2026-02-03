@@ -89,6 +89,8 @@ h5 {
 main {
     margin: 0.5em;
     padding: 0.5em;
+    width: 80%;
+    margin: 0 auto;
 }
 
 header,
@@ -156,7 +158,7 @@ img {
 input {
     height: 45px;
     border-radius: 2em;
-    border: 2px solid #413b3b8e;
+    border: 2px solid var(--text-darker);
     font-family: var(--body-font-family);
     font-weight: var(--body-font-weight);
     padding-left: 2em;
@@ -165,4 +167,55 @@ input {
 #icon {
     width: 50px;
     height: auto;
+}
+
+/***** FILM PAGE *****/
+.film-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.film-grid img {
+    width: 250px;
+    height: auto;
+}
+
+.simpleFilm-card {
+    position: relative;
+}
+
+.filmCard-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    grid-template-areas:
+        ". . c"
+        ". . a"
+        ". . b";
+    row-gap: 0.6em;
+    padding: 0.5em;
+}
+
+.film-rating {
+    grid-area: c;
+}
+
+.film-score {
+    grid-area: a;
+}
+
+.film-favorites {
+    grid-area: b;
+}
+
+.filmCard-overlay span {
+    text-align: center;
+    align-content: center;
+    background-color: var(--background-main);
+    border-radius: 2em;
+    padding: 0.3em;
+    font-size: 0.887rem;
 }
