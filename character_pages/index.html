@@ -32,33 +32,12 @@
         </nav>
     </header>
     <main>
-        <h1>Characters</h1>
-        <!--Search Bar-->
-        <div class="search-container">
-            <form action="">
-                <input type="text" placeholder="Search...">
-                <button type="submit">🔎︎</button>
-            </form>
-        </div>
-        <!--Filter Results-->
-        <span id="filterResult">Filter Results:</span>
-        <div id="filterMenu">
-            <button class="filterBtn" id="filter-nameBtn-AZ">Name: A-Z</button>
-            <button class="filterBtn" id="filter-nameBtn-ZA">Name: Z-A</button>
-            <button class="filterBtn" id="filter-movieTitleBtn-AZ">Movie Title: A-Z</button>
-            <button class="filterBtn" id="filter-movieTitleBtn-ZA">Movie Title: Z-A</button>
-            <button class="filterBtn" id="filter-dateBtn-ON">Release Date: old-new</button>
-            <button class="filterBtn" id="filter-dateBtn-NO">Release Date: new-old</button>
-        </div>
-        <!--Character Cards-->
-        <!--Fill with Character cards
-            Template:
-            <div>
-                <img src="" alt="Photo of Character">
-                Details about Character
-            </div>
-        -->
-        <div class="character-container"></div>
+        <section class="character-detail">
+            <h2 id="character-name"></h2>
+            <h3 id="movie"></h3>
+            <div><img id="characterImage" class="divider" /></div>
+            <p id="characterDesc">Description</p>
+        </section>
     </main>
     <footer>
         <h4>The Ghibli Archive</h4>
