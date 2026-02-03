@@ -42,15 +42,32 @@ async function fetchFilmsData() {
 }
 
 function filmDetailTemplate(film) {
-    return`
-    <div class="film-card" data-film-id="${film.mal_id}">
-        <img src="${film.images.webp.large_image_url}" alt="${film.title}">
-        <h3>${film.title_english}</h3>
-        <h4>${film.title_japanese}</h4>
-        <span class="film-rating">${film.rating}</span>
-        <span class="film-score">${film.score}</span>
-        <span class="film-favorites">${film.favorites}</span>
-    </div>`;
+
+    if (!film.title_english) {
+        return `
+        <div class="simpleFilm-card" data-film-id="${film.mal_id}">
+            <img src="${film.images.webp.large_image_url}" alt="${film.title}">
+            <h3>${film.title}</h3>
+            <h4>${film.title_japanese}</h4>
+            <div class="filmCard-overlay">
+                <span class="film-rating">${film.rating.split(' ', 1)}</span>
+                <span class="film-score">${film.score}</span>
+                <span class="film-favorites">${film.favorites}</span>
+            </div>
+        </div>`;
+    } else {
+        return `
+        <div class="simpleFilm-card" data-film-id="${film.mal_id}">
+            <img src="${film.images.webp.large_image_url}" alt="${film.title}">
+            <h3>${film.title_english}</h3>
+            <h4>${film.title_japanese}</h4>
+            <div class="filmCard-overlay">
+                <span class="film-rating">${film.rating.split(' ', 1)}</span>
+                <span class="film-score">${film.score}</span>
+                <span class="film-favorites">${film.favorites}</span>
+             </div>
+        </div>`;
+    }
 }
 
 export async function displaySimplifiedFilms() {
