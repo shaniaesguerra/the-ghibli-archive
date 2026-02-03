@@ -1,0 +1,117 @@
+:root {
+    --heading-font-family: "Italiana", sans-serif;
+    --heading-font-weight: 400;
+    --subheading-font-family: "Montserrat", sans-serif;
+    --subheading-font-weight: 600;
+    --body-font-family: "Montserrat", sans-serif;
+    --body-font-weight: 400;
+
+    /*Colors*/
+    --primary-color: #3e848c;
+    --accent-color: #d8b03c;
+    --dark-color: #413b3b;
+    --secondary-color: #f2adb2;
+    --light-color: #f5e3d2;
+    --light-text: #ffff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--body-font-family);
+    font-weight: var(--body-font-weight);
+}
+
+main {
+    margin: 0.5em;
+    padding: 0.5em;
+}
+
+header,
+footer {
+    padding: 1em;
+}
+
+header,
+footer {
+    justify-content: space-between;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+footer {
+    display: flex;
+    border-radius: 2em 2em 0 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1,
+footer p:first-child {
+    font-family: var(--heading-font-family);
+    font-weight: 600;
+}
+
+footer p:first-child {
+    font-size: 1.5em;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 53px 1fr 2fr;
+    column-gap: 0.5em;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 0 2em 2em;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    align-content: center;
+    justify-content: space-evenly;
+}
+
+header a {
+    text-decoration: none;
+    color: var(--light-color);
+
+    &:hover {
+        color: var(--accent-color);
+    }
+}
+
+button {
+    height: 45px;
+    padding: 0.5em;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 1rem;
+    font-family: var(--subheading-font-family);
+    font-weight: var(--subheading-font-weight);
+
+}
+
+img {
+    border-radius: 0.6em;
+    width: 100px;
+    height: auto;
+}
+
+input{
+    height: 45px;
+    border-radius: 2em;
+    border: 2px solid #413b3b8e;
+    font-family: var(--body-font-family);
+    font-weight: var(--body-font-weight);
+    padding-left: 2em;
+}
+
+#icon {
+    width: 50px;
+    height: auto;
+}
