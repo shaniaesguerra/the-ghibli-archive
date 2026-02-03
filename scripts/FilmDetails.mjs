@@ -1,7 +1,4 @@
-import { renderWithTemplate } from "./utils.mjs";
-
-const STUDIO_GHIBLI_ID = 21;
-const JIKAN_API_URL = `https://api.jikan.moe/v4`;
+import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL } from "./utils.mjs";
 
 //Get Character Information. Returns all characters in ghibli
 async function fetchFilmsData() {

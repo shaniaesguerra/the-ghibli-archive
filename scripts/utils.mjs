@@ -1,3 +1,6 @@
+export const STUDIO_GHIBLI_ID = 21;
+export const JIKAN_API_URL = `https://api.jikan.moe/v4`;
+
 // retrieve data from localstorage
 export function getLocalStorage(key) {
     return JSON.parse(localStorage.getItem(key));
