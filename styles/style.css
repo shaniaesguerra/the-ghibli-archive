@@ -1,18 +1,33 @@
 :root {
-    --heading-font-family: "Italiana", sans-serif;
-    --heading-font-weight: 400;
-    --subheading-font-family: "Montserrat", sans-serif;
-    --subheading-font-weight: 600;
+    --heading-font-family: 'Shippori Antique B1';
+    --heading-font-weight: 700;
     --body-font-family: "Montserrat", sans-serif;
     --body-font-weight: 400;
 
     /*Colors*/
-    --primary-color: #3e848c;
-    --accent-color: #d8b03c;
-    --dark-color: #413b3b;
-    --secondary-color: #f2adb2;
-    --light-color: #f5e3d2;
-    --light-text: #ffff;
+    --text-lighter: oklch(41.23% 0.009 17.54);
+    --text-main: oklch(35.46% 0.008 17.55);
+    --text-darker: oklch(21.25% 0.005 17.53);
+
+    --background-main: oklch(99.11% 0.000 89.88);
+    --background-100: oklch(92.49% 0.000 89.88);
+    --background-200: oklch(84.52% 0.000 89.88);
+    --background-600: oklch(51.03% 0.000 89.88);
+    --background-800: oklch(32.11% 0.000 89.88);
+    --background-950: oklch(15.91% 0.000 89.88);
+
+    --primary-lighter: oklch(94.47% 0.035 205.49);
+    --primary-main: oklch(85.78% 0.086 204.99);
+    --primary-darker: oklch(80.12% 0.114 205.20);
+
+    --secondary-lighter: oklch(94.70% 0.025 11.58);
+    --secondary-main: oklch(88.37% 0.057 12.90);
+    --secondary-darker: oklch(79.44% 0.108 14.73);
+
+    --accent-lighter: oklch(92.57% 0.098 91.74);
+    --accent-main: oklch(87.38% 0.155 89.91);
+    --accent-darker: oklch(83.53% 0.171 84.66);
+
 }
 
 body {
@@ -21,7 +36,55 @@ body {
     box-sizing: border-box;
     font-family: var(--body-font-family);
     font-weight: var(--body-font-weight);
+    color: var(--text-main);
+    background-color: var(--background);
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+#sitename {
+    font-family: var(--heading-font-family);
+    font-weight: var(--heading-font-weight);
+}
+
+html {
+    font-size: 100%;
+    /* 16px */
+}
+
+h1 {
+    font-size: 1.990rem;
+    /* 31.84px */
+}
+
+h2 {
+    font-size: 1.658rem;
+    /* 26.56px */
+}
+
+h3 {
+    font-size: 1.382rem;
+    /* 22.08px */
+}
+
+h4,
+#sitename {
+    font-size: 1.152rem;
+    /* 18.4px */
+}
+
+h5 {
+    font-size: 0.960rem;
+    /* 15.36px */
+}
+
+/* .small {
+    font-size: 0.667rem;
+    /* 10.72px 
+} */
 
 main {
     margin: 0.5em;
@@ -36,10 +99,8 @@ footer {
 header,
 footer {
     justify-content: space-between;
-    background-color: var(--dark-color);
-    color: var(--light-color);
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
+    background-color: var(--text-main);
+    color: var(--background-main);
 }
 
 footer {
@@ -47,16 +108,6 @@ footer {
     border-radius: 2em 2em 0 0;
     justify-content: space-between;
     align-items: center;
-}
-
-h1,
-footer p:first-child {
-    font-family: var(--heading-font-family);
-    font-weight: 600;
-}
-
-footer p:first-child {
-    font-size: 1.5em;
 }
 
 header {
@@ -78,21 +129,21 @@ nav ul {
 
 header a {
     text-decoration: none;
-    color: var(--light-color);
+    color: var(--background-main);
 
     &:hover {
-        color: var(--accent-color);
+        color: var(--accent-lighter);
     }
 }
 
 button {
     height: 45px;
     padding: 0.5em;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-main);
     border: none;
     border-radius: 1rem;
-    font-family: var(--subheading-font-family);
-    font-weight: var(--subheading-font-weight);
+    font-family: var(--body-font-family);
+    font-weight: var(--body-font-weight);
 
 }
 
@@ -102,7 +153,7 @@ img {
     height: auto;
 }
 
-input{
+input {
     height: 45px;
     border-radius: 2em;
     border: 2px solid #413b3b8e;
