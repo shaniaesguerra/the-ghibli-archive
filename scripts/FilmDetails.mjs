@@ -28,7 +28,7 @@ async function fetchFilmsData() {
             if (hasNextPage) {
                 //Wait between requests
                 currentPage++; //got to nextpage
-                await new Promise(resolve => setTimeout(resolve, 400));
+                await new Promise(resolve => setTimeout(resolve, 1000));
             }
 
         } catch (error) {
@@ -37,24 +37,27 @@ async function fetchFilmsData() {
         }
     }
 
+    //console.log(allFilms); for debugging
     return allFilms;
 }
 
-//fetchFilmsData();
-
 function filmDetailTemplate(film) {
     return`
-    <div class="film-card">
-        <img src="${film.images.jpg.large_image_url}" alt="${film.title}">
+    <div class="film-card" data-film-id="${film.mal_id}">
+        <img src="${film.images.webp.large_image_url}" alt="${film.title}">
         <h3>${film.title_english}</h3>
-        <h4>${film.title_japanese}</h3>
-        <p>Type: ${film.type} | Score: ${film.score} || Popularity:${film.popularity}</p>
+        <h4>${film.title_japanese}</h4>
+        <span class="film-rating">${film.rating}</span>
+        <span class="film-score">${film.score}</span>
+        <span class="film-favorites">${film.favorites}</span>
     </div>`;
 }
 
-export async function displayFilms() {
+export async function displaySimplifiedFilms() {
     const allFilms = await fetchFilmsData();
     const container = document.querySelector(".film-grid");
+
+    //Render card for each movie
     allFilms.forEach(film => {
         renderWithTemplate(filmDetailTemplate(film), container);
     });
