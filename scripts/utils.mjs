@@ -28,7 +28,7 @@ export async function loadHeaderFooter() {
 
 //Render data on template
 export function renderWithTemplate(template, parentElement, data, callback) {
-    parentElement.innerHTML = template;
+    parentElement.innerHTML += template;
     if (callback) {
         callback(data);
     }
