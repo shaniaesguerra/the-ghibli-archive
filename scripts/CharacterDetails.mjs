@@ -5,6 +5,13 @@ import { fetchFilmsData } from "./FilmDetails.mjs";
 
 //Fetch CharId Data and return the information
 async function fetchCharIdData() {
+    //Check local storage for data stored:
+    const cached = localStorage.getItem('charID_cache');
+    if (cached) {
+        return JSON.parse(cached); //return the stored data
+    }
+
+    //else load the data:
     // fetch all the data once to avoid a long wait
     const [ghibliPeople, jikanFilms, ghibliFilms] = await Promise.all([
         fetch(`${STUDIO_GHIBLI_URL}/people`).then(res => res.json()),
@@ -22,6 +29,7 @@ async function fetchCharIdData() {
             urlToMalId[gf.url] = match.mal_id
         };
     });
+    //console.log(urlToMalId);
 
     // Get unique Film IDs to fetch
     // using an object as a toggle prevents duplicate IDs
@@ -42,35 +50,60 @@ async function fetchCharIdData() {
     // Fetch character data needed: name, character mal_id from Jikan 
     // using the uniqueIds object
     let allCharacters = [];
-    const idList = Object.keys(uniqueIds); //using objects gets only one instance of the id
+    const filmIdList = Object.keys(uniqueIds); //using objects gets only one instance of the id
 
-    for (const id of idList) {
-        const res = await fetch(`${JIKAN_API_URL}/anime/${id}/characters`);
-        const json = await res.json();
+    for (const id of filmIdList) {
+        try {
+            const response = await fetch(`${JIKAN_API_URL}/anime/${id}/characters`);
 
-        if (json.data) {
-            json.data.forEach(c => {
-                allCharacters.push({
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const json = await response.json();
+            console.log(json);
+            if (json.data) {
+                const filmChars = json.data.map(c => ({
                     name: c.character.name.toString(),
+                    photo: c.character.images.webp,
                     charID: c.character.mal_id
-                });
-            });
+                }));
+                
+                filmChars.forEach(fc => {
+                    allCharacters.push(fc);
+                })
+                
+            }
+            // small delay for request limit
+            await new Promise(resolve => setTimeout(resolve, 1000));
         }
-        // small delay for request limit
-        await new Promise(resolve => setTimeout(resolve, 350));
+        catch (error) {
+            console.error('Error fetching data:', error);
+            break;
+        }
     }
-
     console.log(allCharacters);
-    return allCharacters;
+
+    //Use local storage to store results
+    //to save time loading
+    const charIDs = allCharacters;
+    localStorage.setItem('charID_cache', JSON.stringify(charIDs));
+    return charIDs;
 }
-//fetchCharIdData();
 
-//Get Full Character Data from an id list
-function getFullCharData(charList) {
-    
+function charSimpleCardTemplate(char) {
+    return `
+        <div class="simpleFilm-card" data-film-id="${char.mal_id}">
+            <img src="${char.photo.image_url}" alt="${char.name}'s Photo">
+            <h3>${char.name}</h3>
+        </div>`;
 }
 
-//Character Simple Detail Card Template
-function characterDetailTemplate(character) {
-
+//Get Full Character Data from an id list:
+export async function displaySimplifiedChar() {
+    const allsimpleChar = await fetchCharIdData();
+    const container = document.querySelector(".character-grid");
+    //Render card for each movie
+    allsimpleChar.forEach(char => {
+        renderWithTemplate(charSimpleCardTemplate(char), container);
+    });
 }

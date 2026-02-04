@@ -42,7 +42,7 @@ export async function fetchFilmsData() {
     return allFilms;
 }
 
-function filmSimpleDetailTemplate(film) {
+function filmSimpleCardTemplate(film) {
 
     if (!film.title_english) {
         return `
@@ -77,6 +77,6 @@ export async function displaySimplifiedFilms() {
 
     //Render card for each movie
     allFilms.forEach(film => {
-        renderWithTemplate(filmSimpleDetailTemplate(film), container);
+        renderWithTemplate(filmSimpleCardTemplate(film), container);
     });
 }
