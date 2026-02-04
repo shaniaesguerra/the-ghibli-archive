@@ -92,7 +92,7 @@ async function fetchCharIdData() {
 
 function charSimpleCardTemplate(char) {
     return `
-        <div class="simpleFilm-card" data-film-id="${char.mal_id}">
+        <div class="simpleChar-card" data-film-id="${char.mal_id}">
             <img src="${char.photo.image_url}" alt="${char.name}'s Photo">
             <h3>${char.name}</h3>
         </div>`;

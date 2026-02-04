@@ -170,14 +170,14 @@ input {
 }
 
 /***** FILM PAGE *****/
-.film-grid {
+.film-grid, .character-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
 }
 
-.film-grid img {
+.film-grid img{
     width: 250px;
     height: auto;
 }
@@ -218,4 +218,20 @@ input {
     border-radius: 2em;
     padding: 0.3em;
     font-size: 0.887rem;
+}
+
+/****CHARACTER PAGE ***/
+.simpleChar-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.simpleChar-card h3{
+    margin-top: 0;
+}
+
+.simpleChar-card img{
+    width: 200px;
 }
