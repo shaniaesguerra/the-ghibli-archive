@@ -60,7 +60,8 @@ async function fetchCharIdData() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const json = await response.json();
-            console.log(json);
+            //console.log(json); debugging
+
             if (json.data) {
                 const filmChars = json.data.map(c => ({
                     name: c.character.name.toString(),
@@ -81,7 +82,8 @@ async function fetchCharIdData() {
             break;
         }
     }
-    console.log(allCharacters);
+    
+    //console.log(allCharacters); debugging
 
     //Use local storage to store results
     //to save time loading
