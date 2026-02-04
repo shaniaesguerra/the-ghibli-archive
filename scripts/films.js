@@ -1,5 +1,5 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadFooter } from "./utils.mjs";
 import { displaySimplifiedFilms } from "./FilmDetails.mjs";
 
-loadHeaderFooter();
+loadFooter();
 displaySimplifiedFilms();

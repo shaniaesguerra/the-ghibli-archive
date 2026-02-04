@@ -1,6 +1,6 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadFooter } from "./utils.mjs";
 
-loadHeaderFooter();
+loadFooter();
 //Test: Fetch data (both working)
 /******************************
 Studio Ghibli API

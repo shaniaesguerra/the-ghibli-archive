@@ -1,7 +1,7 @@
-import { loadHeaderFooter} from "./utils.mjs";
+import { loadFooter} from "./utils.mjs";
 import Character from "./CharacterDetails.mjs";
 
-loadHeaderFooter();
+loadFooter();
 
 const charContainer = document.querySelector(".character-container");
 const characterCard = document.createElement('div');
