@@ -1,5 +1,6 @@
 export const STUDIO_GHIBLI_ID = 21;
-export const JIKAN_API_URL = `https://api.jikan.moe/v4`;
+export const JIKAN_API_URL = "https://api.jikan.moe/v4";
+export const STUDIO_GHIBLI_URL = "https://ghibliapi.dev";
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {

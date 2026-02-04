@@ -1,7 +1,7 @@
 import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL } from "./utils.mjs";
 
 //Get Character Information. Returns all films in ghibli
-async function fetchFilmsData() {
+export async function fetchFilmsData() {
     let currentPage = 1;
     let allFilms = [];
     let hasNextPage = true;
