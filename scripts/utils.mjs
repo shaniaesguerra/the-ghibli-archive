@@ -19,8 +19,8 @@ export async function loadTemplate(path) {
 
 //Render Header and Footer
 export async function loadHeaderFooter() {
-    const templateHeader = await loadTemplate("https://shaniaesguerra.github.io/the-ghibli-archive/partials/header.html");
-    const templateFooter = await loadTemplate("https://shaniaesguerra.github.io/the-ghibli-archive/partials/footer.html");
+    const templateHeader = await loadTemplate(".././partials/header.html");
+    const templateFooter = await loadTemplate(".././shaniaesguerra.github.io/the-ghibli-archive/partials/footer.html");
 
     const header = document.querySelector("#dynamic-header");
     const footer = document.querySelector("#dynamic-footer");
