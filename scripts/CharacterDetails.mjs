@@ -1,143 +1,76 @@
-import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL, STUDIO_GHIBLI_URL } from "./utils.mjs";
+import { renderWithTemplate, JIKAN_API_URL, STUDIO_GHIBLI_URL } from "./utils.mjs";
 import { fetchFilmsData } from "./FilmDetails.mjs";
 
 //Get Character Information. Returns all characters in ghibli
-//Helper Function:
-//Get Simplified Character Data using Studio Ghibli API
-async function fetchSimpleCharData() {
-    let simpleCharData = [];
-    try {
-        const response = await fetch(`${STUDIO_GHIBLI_URL}/people`);
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+//Fetch CharId Data and return the information
+async function fetchCharIdData() {
+    // fetch all the data once to avoid a long wait
+    const [ghibliPeople, jikanFilms, ghibliFilms] = await Promise.all([
+        fetch(`${STUDIO_GHIBLI_URL}/people`).then(res => res.json()),
+        fetchFilmsData(),
+        fetch(`${STUDIO_GHIBLI_URL}/films`).then(res => res.json())
+    ]);
 
-        const simpleChar = await response.json();
-        //console.log(simpleChar); //for debugging
-        simpleChar.forEach(char => {
-            simpleCharData.push(char);
-        });
-    }
-    catch (error) {
-        console.error('Error fetching data:', error);
-    }
-
-    //console.log(simpleCharData); //for debugging
-    return simpleCharData;
-}
-
-//fetchSimpleCharData(); for debugging
-
-//Helper Function:
-//Get the Film data by passing the film url
-async function getFilm(filmUrl) {
-    try {
-        const response = await fetch(`${filmUrl}`);
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const film = await response.json();
-        //console.log("Film:", film); //for debugging
-        return film;
-    }
-    catch (error) {
-        console.error('Error fetching data:', error);
-    }
-}
-
-//Helper Function:
-//Compare character data and film to get the joined data we want:
-//  Film(filmID) the character was in.
-async function getCharInFilm() {
-    const simpleChar = await fetchSimpleCharData();
-    const allFilms = await fetchFilmsData();
-    const charInFilm = []; //store character name and film they were in
-
-    for (const char of simpleChar) {
-        //get film data for comparison
-        const filmData = await getFilm(char.films);
-
-        //find the data of all films to find matching film data
-        const match = allFilms.find(af => af.title_english === filmData.title);
+    // Get Ghibli Film URLs to corresponding Jikan Film mal_IDs
+    // creating a simple object: { "https://ghibli.../film-id": 199 }
+    const urlToMalId = {};
+    ghibliFilms.forEach(gf => {
+        const match = jikanFilms.find(jf => jf.title_english === gf.title);
         if (match) {
-            //If a match is found, get the info we need:
-            charInFilm.push({
-                name: char.name,
-                film: match.mal_id
-            });
-        }
-    }
+            //get corresponding Film URl: Film mal_id
+            urlToMalId[gf.url] = match.mal_id
+        };
+    });
 
-    console.log(charInFilm);
-    return charInFilm;
-}
+    // Get unique Film IDs to fetch
+    // using an object as a toggle prevents duplicate IDs
+    const uniqueIds = {};
+    //Get People data from Studio Ghibli API:
+    ghibliPeople.forEach(character => {
+        //For each Character, get the corresponding film url array:
+        character.films.forEach(url => {
+            const malId = urlToMalId[url];
+            if (malId) {
+                // if the id exists, update the object:
+                // Film mal_id: state(true or false)
+                uniqueIds[malId] = true
+            };
+        });
+    });
 
-//getCharInFilm(); //for debugging
-
-//Helper Function:
-//Get character ID through the film ID
-async function fetchFullCharData() {
-    const charInFilm = await getCharInFilm();
+    // Fetch character data needed: name, character mal_id from Jikan 
+    // using the uniqueIds object
     let allCharacters = [];
+    const idList = Object.keys(uniqueIds); //using objects gets only one instance of the id
 
+    for (const id of idList) {
+        const res = await fetch(`${JIKAN_API_URL}/anime/${id}/characters`);
+        const json = await res.json();
 
-    for (const char of charInFilm) {
-        try {
-            const response = await fetch(`${JIKAN_API_URL}/anime/${char.film}/characters`);
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const charDetails = await response.json();
-            console.log(charDetails); //for debugging
-
-            //put data in list
-            charDetails.data.forEach(c => {
+        if (json.data) {
+            json.data.forEach(c => {
                 allCharacters.push({
-                    name: encodeURIComponent(c.character.name),
+                    name: c.character.name.toString(),
                     charID: c.character.mal_id
                 });
             });
-            
-            //Wait between requests
-            await new Promise(resolve => setTimeout(resolve, 800));
-
-        } catch (error) {
-            console.error('Error fetching data:', error);
         }
-
+        // small delay for request limit
+        await new Promise(resolve => setTimeout(resolve, 350));
     }
 
     console.log(allCharacters);
     return allCharacters;
 }
+//fetchCharIdData();
 
-//fetchFullCharData();
-
-//Main Function:
-//Get Full Character Data using Jikan API using the data we get
-// from getCharInFilm()
-
+//Get Full Character Data from an id list
+function getFullCharData(charList) {
+    
+}
 
 //Character Simple Detail Card Template
 function characterDetailTemplate(character) {
 
-}
-
-
-export default class Character {
-    constructor(containerElement, dataSource) {
-        this.dataSource = dataSource;
-        this.container = container;
-    }
-    init() {
-
-    }
-    displayAllCharacters(list) {
-
-    }
 }

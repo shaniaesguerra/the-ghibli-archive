@@ -19,7 +19,7 @@ export async function fetchFilmsData() {
 
             //put data in list
             films.data.forEach(film => {
-                allFilms.push(film);
+                allFilms.push(film);// store films in array
             });
 
             //check for another page
@@ -28,7 +28,8 @@ export async function fetchFilmsData() {
             if (hasNextPage) {
                 //Wait between requests
                 currentPage++; //got to nextpage
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                // small delay for request limit
+                await new Promise(resolve => setTimeout(resolve, 350));
             }
 
         } catch (error) {

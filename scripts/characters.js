@@ -1,5 +1,4 @@
 import { loadFooter} from "./utils.mjs";
-import Character from "./CharacterDetails.mjs";
 
 loadFooter();
 
