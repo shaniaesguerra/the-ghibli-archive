@@ -2,6 +2,7 @@ import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL, STUDIO_GHIBLI_URL 
 import { fetchFilmsData } from "./FilmDetails.mjs";
 
 //Get Character Information. Returns all characters in ghibli
+//Helper Function:
 //Get Simplified Character Data using Studio Ghibli API
 async function fetchSimpleCharData() {
     let simpleCharData = [];
@@ -28,9 +29,11 @@ async function fetchSimpleCharData() {
 
 //fetchSimpleCharData(); for debugging
 
-async function getFilm(filmObj) {
+//Helper Function:
+//Get the Film data by passing the film url
+async function getFilm(filmUrl) {
     try {
-        const response = await fetch(`${filmObj}`);
+        const response = await fetch(`${filmUrl}`);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -45,18 +48,22 @@ async function getFilm(filmObj) {
     }
 }
 
-//compare character data and film to get the joined data we want
+//Helper Function:
+//Compare character data and film to get the joined data we want:
+//  Film(filmID) the character was in.
 async function getCharInFilm() {
     const simpleChar = await fetchSimpleCharData();
     const allFilms = await fetchFilmsData();
     const charInFilm = []; //store character name and film they were in
 
     for (const char of simpleChar) {
-        // Now you can safely use await
+        //get film data for comparison
         const filmData = await getFilm(char.films);
 
+        //find the data of all films to find matching film data
         const match = allFilms.find(af => af.title_english === filmData.title);
         if (match) {
+            //If a match is found, get the info we need:
             charInFilm.push({
                 name: char.name,
                 film: match.mal_id
@@ -64,18 +71,57 @@ async function getCharInFilm() {
         }
     }
 
-    console.log(charInFilm); 
+    console.log(charInFilm);
     return charInFilm;
 }
 
 //getCharInFilm(); //for debugging
 
-//Get Full Character Data using Jikan API
+//Helper Function:
+//Get character ID through the film ID
 async function fetchFullCharData() {
+    const charInFilm = await getCharInFilm();
+    let allCharacters = [];
 
+
+    for (const char of charInFilm) {
+        try {
+            const response = await fetch(`${JIKAN_API_URL}/anime/${char.film}/characters`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const charDetails = await response.json();
+            console.log(charDetails); //for debugging
+
+            //put data in list
+            charDetails.data.forEach(c => {
+                allCharacters.push({
+                    name: encodeURIComponent(c.character.name),
+                    charID: c.character.mal_id
+                });
+            });
+            
+            //Wait between requests
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+
+    }
+
+    console.log(allCharacters);
+    return allCharacters;
 }
 
 //fetchFullCharData();
+
+//Main Function:
+//Get Full Character Data using Jikan API using the data we get
+// from getCharInFilm()
+
 
 //Character Simple Detail Card Template
 function characterDetailTemplate(character) {
