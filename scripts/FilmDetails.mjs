@@ -1,6 +1,6 @@
 import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL } from "./utils.mjs";
 
-//Get Character Information. Returns all characters in ghibli
+//Get Character Information. Returns all films in ghibli
 async function fetchFilmsData() {
     let currentPage = 1;
     let allFilms = [];
@@ -14,16 +14,16 @@ async function fetchFilmsData() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            const characters = await response.json();
-            //console.log(characters); //for debugging
+            const films = await response.json();
+            //console.log(films); //for debugging
 
             //put data in list
-            characters.data.forEach(char => {
-                allFilms.push(char);
+            films.data.forEach(film => {
+                allFilms.push(film);
             });
 
             //check for another page
-            hasNextPage = characters.pagination.has_next_page;
+            hasNextPage = films.pagination.has_next_page;
 
             if (hasNextPage) {
                 //Wait between requests
