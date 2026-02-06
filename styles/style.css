@@ -6,7 +6,7 @@
 
     /*Colors*/
     --text-lighter: oklch(41.23% 0.009 17.54);
-    --text-main: oklch(35.46% 0.008 17.55);
+    --text-main: #403a3a;
     --text-darker: oklch(21.25% 0.005 17.53);
 
     --background-main: oklch(99.11% 0.000 89.88);
@@ -38,6 +38,7 @@ body {
     font-weight: var(--body-font-weight);
     color: var(--text-main);
     background-color: var(--background);
+
 }
 
 h1,
@@ -89,13 +90,15 @@ h5 {
 main {
     margin: 0.5em;
     padding: 0.5em;
-    width: 80%;
+    width: 75%;
     margin: 0 auto;
 }
 
 header,
 footer {
     padding: 1em;
+    width: 90%;
+    margin: 0 auto;
 }
 
 header,
@@ -150,7 +153,7 @@ button {
 }
 
 img {
-    border-radius: 0.6em;
+    border-radius: 2em;
     width: 100px;
     height: auto;
 }
@@ -169,15 +172,90 @@ input {
     height: auto;
 }
 
+/***** HOME PAGE *****/
+.cards {
+    box-shadow: 0 4px 6px var(--background-600);
+    padding: 3em;
+    border-radius: 2em;
+    margin: 0.6em 0.6em 2em 0.6em;
+}
+
+
+#filmOfTheDay {
+    display: grid;
+    grid-template-areas:
+        "vid vid vid"
+        "info info info ";
+}
+
+.featureFilm-info {
+    grid-area: info;
+}
+
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    grid-area: vid;
+}
+
+.hero-overlay-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    /*to make sure it's on top*/
+    color: white;
+    background: #0000009a;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.534) 0%, rgba(64, 58, 58, 0.534) 50%, rgba(255, 255, 255, 0.534) 100%);
+    text-align: center;
+    overflow: hidden;
+    border-radius: 2em;
+
+    & h1 {
+        text-transform: uppercase;
+    }
+
+    & h2 {
+        font-style: italic;
+    }
+
+}
+
+.video {
+    grid-area: video;
+    align-self: center;
+    justify-self: center;
+    position: relative;
+    border-radius: 2em;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%;
+    height: 0;
+    box-shadow: 0 4px 6px var(--background-600);
+}
+
+.video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 /***** FILM PAGE *****/
-.film-grid, .character-grid {
+.film-grid,
+.character-grid,
+#popularFilms {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
 }
 
-.film-grid img{
+.film-grid img,
+#popularFilms img {
     width: 250px;
     height: auto;
 }
@@ -221,17 +299,18 @@ input {
 }
 
 /****CHARACTER PAGE ***/
-.simpleChar-card{
+.simpleChar-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
-.simpleChar-card h3{
+
+.simpleChar-card h3 {
     margin-top: 0;
 }
 
-.simpleChar-card img{
+.simpleChar-card img {
     width: 200px;
 }

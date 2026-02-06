@@ -49,8 +49,8 @@ const sortedPopularityList = sortByScore(filmsData);
 //console.log(sortedPopularityList); debugging
 const popularityContainer = document.querySelector("#popularFilms");
 
-//Get only the top 3 to render on page
-for (let i = 0;  i < 3; i++) {
+//Get only the top 10 to render on page
+for (let i = 0;  i < 10; i++) {
     renderWithTemplate(filmSimpleCardTemplate(sortedPopularityList[i]), popularityContainer);
 }
 
