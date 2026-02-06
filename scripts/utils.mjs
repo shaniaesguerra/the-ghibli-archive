@@ -32,3 +32,10 @@ export function renderWithTemplate(template, parentElement, data, callback) {
         callback(data);
     }
 }
+
+//Get random number
+export function getRandomNumber(min, max) {
+    const minimum = Math.ceil(min);
+    const maximum = Math.floor(max);
+    return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+}
