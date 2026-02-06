@@ -2,11 +2,18 @@ import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL } from "./utils.mjs
 
 //Get Character Information. Returns all films in ghibli
 export async function fetchFilmsData() {
+    //Check local storage for data stored:
+    const cached = localStorage.getItem('filmsData_cache');
+    if (cached) {
+        return JSON.parse(cached); //return the stored data
+    }
+
     let currentPage = 1;
     let allFilms = [];
     let hasNextPage = true;
 
     while (hasNextPage) {
+        
         try {
             const response = await fetch(`${JIKAN_API_URL}/anime?producers=${STUDIO_GHIBLI_ID}&page=${currentPage}`);
 
@@ -29,7 +36,7 @@ export async function fetchFilmsData() {
                 //Wait between requests
                 currentPage++; //got to nextpage
                 // small delay for request limit
-                await new Promise(resolve => setTimeout(resolve, 350));
+                await new Promise(resolve => setTimeout(resolve, 1000));
             }
 
         } catch (error) {
@@ -39,7 +46,10 @@ export async function fetchFilmsData() {
     }
 
     //console.log(allFilms); for debugging
-    return allFilms;
+    //to save time loading
+    const filmsData = allFilms;
+    localStorage.setItem('filmsData_cache', JSON.stringify(filmsData));
+    return filmsData;
 }
 
 function filmSimpleCardTemplate(film) {

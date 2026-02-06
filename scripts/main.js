@@ -1,6 +1,14 @@
 import { loadFooter } from "./utils.mjs";
+import { fetchCharIdData } from "./CharacterDetails.mjs";
+import { fetchFilmsData } from "./FilmDetails.mjs";
 
 loadFooter();
+
+//load in data in store in Local Storage
+fetchFilmsData();
+setTimeout(fetchCharIdData, 2000);
+
+
 //Test: Fetch data (both working)
 /******************************
 Studio Ghibli API

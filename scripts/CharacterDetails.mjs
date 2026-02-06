@@ -4,7 +4,7 @@ import { fetchFilmsData } from "./FilmDetails.mjs";
 //Get Character Information. Returns all characters in ghibli
 
 //Fetch CharId Data and return the information
-async function fetchCharIdData() {
+export async function fetchCharIdData() {
     //Check local storage for data stored:
     const cached = localStorage.getItem('charID_cache');
     if (cached) {
