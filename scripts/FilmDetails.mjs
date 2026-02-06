@@ -52,7 +52,7 @@ export async function fetchFilmsData() {
     return filmsData;
 }
 
-function filmSimpleCardTemplate(film) {
+export function filmSimpleCardTemplate(film) {
 
     if (!film.title_english) {
         return `

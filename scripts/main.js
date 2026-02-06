@@ -1,7 +1,8 @@
 import { loadFooter,getRandomNumber,getLocalStorage, setLocalStorage, renderWithTemplate } from "./utils.mjs";
 import { fetchCharIdData } from "./CharacterDetails.mjs";
-import { fetchFilmsData } from "./FilmDetails.mjs";
+import { fetchFilmsData, filmSimpleCardTemplate} from "./FilmDetails.mjs";
 import { featuredFilmTemplate } from "./FeaturedFilm.mjs";
+import { sortByScore } from "./Sort.mjs";
 
 loadFooter();
 
@@ -42,8 +43,16 @@ else {
     setLocalStorage("current_film_number", currentFilmIndex);
 }
 
-/************** Top 3 Popular Films **************/
+/************** Most Popular Films **************/
+//Sort from highest to lowest popularity 
+const sortedPopularityList = sortByScore(filmsData);
+//console.log(sortedPopularityList); debugging
+const popularityContainer = document.querySelector("#popularFilms");
 
+//Get only the top 3 to render on page
+for (let i = 0;  i < 3; i++) {
+    renderWithTemplate(filmSimpleCardTemplate(sortedPopularityList[i]), popularityContainer);
+}
 
 
 
