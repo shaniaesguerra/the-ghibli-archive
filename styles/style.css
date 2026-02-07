@@ -223,7 +223,7 @@ input {
         "info info info ";
     margin-bottom: 2em;
 
-    & h3{
+    & h3 {
         text-align: center;
     }
 }
@@ -241,6 +241,7 @@ input {
 
     & .title-heading {
         grid-area: title;
+        align-content: center;
 
         & h1 {
             text-align: center;
@@ -285,6 +286,7 @@ input {
         grid-area: synopsis;
         text-align: center;
         margin-bottom: 0.5em;
+        margin-top: 0;
         padding: 0 5em 0 5em;
         display: grid;
         align-items: end;
@@ -299,6 +301,7 @@ input {
         margin-top: 0;
     }
 }
+
 
 .video {
     grid-area: video;

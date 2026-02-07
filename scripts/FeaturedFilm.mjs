@@ -3,16 +3,23 @@ export function featuredFilmTemplate(film) {
 
         if (!film.trailer.embed_url) {
             return `
-            <figure><img src="${film.images.webp.large_image_url}" alt="${film.title_english} Movie Poster"></figure>
-            <h3 class="film-title">${film.title}<br><span class="film-title-japanese">${film.title_japanese}</span></h3>
-            <h4>Synopsis:</h4>
-            <p>${film.synopsis}</p>
+            <div class="featureFilm-info">
+                <figure>
+                    <img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster">
+                </figure>
+                <div class="title-heading">
+                    <h1>Ghibli Film of the Day</h1>
+                    <h2 class="film-title">${film.title}<br><span class="film-title-japanese">${film.title_japanese}</span></h2>
+                </div>
+                <h4>Synopsis:</h4>
+                <p>${film.synopsis}</p>
+            </div >
             `;
         } else {
             return `
-                < div class="featureFilm-info" >
+            <div class="featureFilm-info">
                 <figure>
-                    <img src="${film.images.webp.large_image_url}" alt="${film.title_english} Movie Poster">
+                    <img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster">
                 </figure>
                 <div class="title-heading">
                     <h1>Ghibli Film of the Day</h1>
@@ -30,10 +37,17 @@ export function featuredFilmTemplate(film) {
     else {
         if (!film.trailer.embed_url) {
             return `
-            <figure><img src="${film.images.webp.large_image_url}" alt="${film.title_english} Movie Poster"></figure>
-            <h3 class="film-title">${film.title_english}<br><span class="film-title-japanese">${film.title_japanese}</span></h3>
-            <h4>Synopsis:</h4>
-            <p>${film.synopsis}</p>
+            <div class="featureFilm-info">
+                <figure>
+                    <img src="${film.images.webp.large_image_url}" alt="${film.title_english} Movie Poster">
+                </figure>
+                <div class="title-heading">
+                    <h1>Ghibli Film of the Day</h1>
+                    <h2 class="film-title">${film.title_english}<br><span class="film-title-japanese">${film.title_japanese}</span></h2>
+                </div>
+                <h4>Synopsis:</h4>
+                <p>${film.synopsis}</p>
+            </div >
             `;
         } else {
             return `
