@@ -6,7 +6,7 @@
 
     /*Colors*/
     --text-lighter: oklch(41.23% 0.009 17.54);
-    --text-main: #403a3a;
+    --text-main: oklch(35.46% 0.00838 17.291);
     --text-darker: oklch(21.25% 0.005 17.53);
 
     --background-main: oklch(99.11% 0.000 89.88);
@@ -172,6 +172,28 @@ input {
     height: auto;
 }
 
+/*Buttons for navigation in page*/
+.pagesBtn {
+    text-decoration: none;
+    color: var(--text-darker);
+    background-color: var(--accent-lighter);
+    padding: 0 1em;
+    height: 45px;
+    width: auto;
+    border-radius: 2em;
+    display: inline-block;
+    align-content: center;
+    text-align: center;
+}
+
+.pagesBtn:hover {
+    background-color: var(--accent-main);
+}
+
+#seeMoreFilms-main {
+    margin-left: 5%;
+}
+
 /***** HOME PAGE *****/
 .cards {
     box-shadow: 0 4px 6px var(--background-600);
@@ -180,23 +202,70 @@ input {
     margin: 0.6em 0.6em 2em 0.6em;
 }
 
+#popularFilms {
+    margin-top: 1.5em;
+}
+
+#topRatedFilms section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#topRatedFilms h2 {
+    display: inline-block;
+}
 
 #filmOfTheDay {
-    display: grid;
+    display: block;
     grid-template-areas:
         "vid vid vid"
         "info info info ";
+    margin-bottom: 2em;
+
+    & h3{
+        text-align: center;
+    }
 }
 
 .featureFilm-info {
     grid-area: info;
-    display: grid;
+    display: block;
     grid-template-areas:
         "photo title"
+        "photo synopsis"
         "photo paragraph";
 
     column-gap: 1em;
     margin: 2em 0.5em 3em 0.5em;
+
+    & .title-heading {
+        grid-area: title;
+
+        & h1 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        & h2 {
+            position: relative;
+            text-align: center;
+            color: var(--text-main);
+
+            & span {
+                position: absolute;
+                top: -50%;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                font-size: 200%;
+                display: inline-block;
+                z-index: -1;
+                /* opacity / 0.171 / 0.322 */
+                color: oklch(79.469% 0.10761 13.964 / 0.322);
+            }
+        }
+    }
 
     & figure {
         grid-area: photo;
@@ -206,11 +275,14 @@ input {
 
         & img {
             width: 100%;
+            border-bottom: 8px solid var(--primary-lighter);
+            border-left: 8px solid var(--primary-lighter);
+            box-shadow: -4px 6px 20px var(--background-600);
         }
     }
 
     & h4 {
-        grid-area: title;
+        grid-area: synopsis;
         text-align: center;
         margin-bottom: 0.5em;
         padding: 0 5em 0 5em;
@@ -223,45 +295,9 @@ input {
         line-height: 1.5;
         text-indent: 2em;
         text-align: left;
-        padding: 0 5em 0 5em;
+        padding: 0;
         margin-top: 0;
     }
-}
-
-.hero-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    grid-area: vid;
-}
-
-.hero-overlay-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 80%;
-    z-index: 10;
-    /*to make sure it's on top*/
-    color: white;
-    background: var(--background-950);
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.534) 0%, rgba(64, 58, 58, 0.301) 50%, rgba(64, 58, 58, 0.301) 100%);
-    text-align: left;
-    padding-left: 1em;
-    overflow: hidden;
-    border-radius: 2em;
-
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    & h1 {
-        text-transform: uppercase;
-    }
-
-    & h2 {
-        font-style: italic;
-    }
-
 }
 
 .video {
@@ -271,8 +307,8 @@ input {
     position: relative;
     border-radius: 2em;
     overflow: hidden;
-    width: 80%;
     padding-top: 56.25%;
+    width: 80%;
     height: 0;
     box-shadow: 0 4px 6px var(--background-600);
 }
@@ -289,7 +325,7 @@ input {
 .film-grid,
 .character-grid,
 #popularFilms {
-    display: grid;
+    display: block;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
@@ -303,13 +339,23 @@ input {
 
 .simpleFilm-card {
     position: relative;
+
+    & h4 {
+        margin-top: 0;
+        font-style: italic;
+    }
+
+    & h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 }
 
 .filmCard-overlay {
     position: absolute;
     top: 0;
     left: 0;
-    display: grid;
+    display: block;
     grid-template-areas:
         ". . c"
         ". . a"
@@ -354,4 +400,23 @@ input {
 
 .simpleChar-card img {
     width: 200px;
+}
+
+@media screen and (min-width: 904px) {
+
+    .film-grid,
+    .character-grid,
+    .filmCard-overlay,
+    .featureFilm-info,
+    #popularFilms {
+        display: grid;
+    }
+
+    .hero-overlay-content {
+        display: flex;
+    }
+
+    .featureFilm-info p {
+        padding: 0 5em 0 5em;
+    }
 }
