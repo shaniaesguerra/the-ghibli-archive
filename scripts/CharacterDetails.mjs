@@ -66,7 +66,8 @@ export async function fetchCharIdData() {
                 const filmChars = json.data.map(c => ({
                     name: c.character.name.toString(),
                     photo: c.character.images.webp,
-                    charID: c.character.mal_id
+                    charID: c.character.mal_id,
+                    filmID: id
                 }));
                 
                 filmChars.forEach(fc => {
@@ -92,7 +93,7 @@ export async function fetchCharIdData() {
     return charIDs;
 }
 
-function charSimpleCardTemplate(char) {
+export function charSimpleCardTemplate(char) {
     return `
         <div class="simpleChar-card" data-film-id="${char.mal_id}">
             <img src="${char.photo.image_url}" alt="${char.name}'s Photo">
