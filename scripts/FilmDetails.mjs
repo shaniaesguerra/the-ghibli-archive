@@ -1,4 +1,4 @@
-import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL, setSessionStorage, getSessionStorage } from "./utils.mjs";
+import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL, setSessionStorage, getSessionStorage, makeCardClickEvent } from "./utils.mjs";
 import { charSimpleCardTemplate } from "./CharacterDetails.mjs";
 
 //Get Character Information. Returns all films in ghibli
@@ -58,7 +58,7 @@ export function filmSimpleCardTemplate(film) {
     if (!film.title_english) {
         return `
         <div class="simpleFilm-card" data-film-id="${film.mal_id}">
-            <img src="${film.images.webp.large_image_url}" alt="${film.title}">
+            <img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster">
             <h3>${film.title}</h3>
             <h4>${film.title_japanese}</h4>
             <div class="filmCard-overlay">
@@ -98,52 +98,155 @@ export function filmDetailedPageTemplate(film) {
     if (!film.title_english) {
 
         if (!film.trailer.embed_url) {
-            
-        } else {
             return `
             <div class="title-heading">
-                <h1>Ghibli Film of the Day</h1>
-                <h2 class="film-title">${film.title_english}<br><span class="film-title-japanese">${film.title_japanese}</span></h2>
+                <h1 class="film-title">${film.title}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
             </div>
             <div class="film-photos">
-                <figure><img src="" alt=""></figure>
+                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
             </div>
             <div class="film-general-info">
                 <div class="film-background">
                     <h2>Background</h2>
-                    <p></p>
+                    <p>${film.background}</p>
                 </div>
                 <div class="film-synopsis">
                     <h2>Synopsis</h2>
-                    <p></p>
-                </div>
-                <div class="video film-video">
-                    <h2>Trailer</h2>
-                    <iframe src="" frameborder="0"></iframe>
+                    <p>${film.synopsis}</p>
                 </div>
                 <div class="film-characters">
                     <!--populate with simple character cards-->
                 </div>
             </div>
             <div class="film-detail-info">
-                <p>Type: <span></span></p>
-                <p>Duration: <span></span></p>
-                <p>Episodes: <span></span></p>
-                <p>Genres: <span></span></p>
-                <p>Rating: <span></span></p>
-                <p>Popularity: <span></span></p>
-                <p>Score: <span></span></p>
-                <p>Score By: <span></span></p>
-                <p>Status: <span></span></p>
+                <p>Japanese Title: <span>${film.title_japanese}</span></p>
+                <p>Romaji Title: <span>${film.title}</span></p>
+                <p>Type: <span>${film.type}</span></p>
+                <p>Duration: <span>${film.duration}</span></p>
+                <p>Episodes: <span>${film.episodes}</span></p>
+                <p>Genres: <span>${film.genres.map(genre => genre.name).join(' , ')}</span></p>
+                <p>Rating: <span>${film.rating}</span></p>
+                <p>Favorites: <span>${film.favorites}</span></p>
+                <p>Score: <span>${film.score}</span></p>
+                <p>Score By: <span>${film.score_by}</span></p>
+                <p>Status: <span>${film.status}</span></p>
+            </div>`;
+
+        } else {
+            return `
+            <div class="title-heading">
+                <h1 class="film-title">${film.title}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
+            </div>
+            <div class="film-photos">
+                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
+            </div>
+            <div class="film-general-info">
+                <div class="film-background">
+                    <h2>Background</h2>
+                    <p>${film.background}</p>
+                </div>
+                <div class="film-synopsis">
+                    <h2>Synopsis</h2>
+                    <p>${film.synopsis}</p>
+                </div>
+                <div class="video film-video">
+                    <h2>Trailer</h2>
+                    <iframe width="560" height="315" src="${film.trailer.embed_url}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="film-characters">
+                    <!--populate with simple character cards-->
+                </div>
+            </div>
+            <div class="film-detail-info">
+                <p>Japanese Title: <span>${film.title_japanese}</span></p>
+                <p>Romaji Title: <span>${film.title}</span></p>
+                <p>Type: <span>${film.type}</span></p>
+                <p>Duration: <span>${film.duration}</span></p>
+                <p>Episodes: <span>${film.episodes}</span></p>
+                <p>Genres: <span>${film.genres.map(genre => genre.name).join(' , ')}</span></p>
+                <p>Rating: <span>${film.rating}</span></p>
+                <p>Favorites: <span>${film.favorites}</span></p>
+                <p>Score: <span>${film.score}</span></p>
+                <p>Score By: <span>${film.score_by}</span></p>
+                <p>Status: <span>${film.status}</span></p>
             </div>`;
         }
     }
     else {
+        if (!film.trailer.embed_url) {
+            return `
+            <div class="title-heading">
+                <h1 class="film-title">${film.title_english}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
+            </div>
+            <div class="film-photos">
+                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
+            </div>
+            <div class="film-general-info">
+                <div class="film-background">
+                    <h2>Background</h2>
+                    <p>${film.background}</p>
+                </div>
+                <div class="film-synopsis">
+                    <h2>Synopsis</h2>
+                    <p>${film.synopsis}</p>
+                </div>
+                <div class="film-characters">
+                    <!--populate with simple character cards-->
+                </div>
+            </div>
+            <div class="film-detail-info">
+                <p>Japanese Title: <span>${film.title_japanese}</span></p>
+                <p>Romaji Title: <span>${film.title}</span></p>
+                <p>Type: <span>${film.type}</span></p>
+                <p>Duration: <span>${film.duration}</span></p>
+                <p>Episodes: <span>${film.episodes}</span></p>
+                <p>Genres: <span>${film.genres.map(genre => genre.name).join(' , ')}</span></p>
+                <p>Rating: <span>${film.rating}</span></p>
+                <p>Favorites: <span>${film.favorites}</span></p>
+                <p>Score: <span>${film.score}</span></p>
+                <p>Score By: <span>${film.score_by}</span></p>
+                <p>Status: <span>${film.status}</span></p>
+            </div>`;
+
+        } else {
+            return `
+            <div class="title-heading">
+                <h1 class="film-title">${film.title_english}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
+            </div>
+            <div class="film-photos">
+                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
+            </div>
+            <div class="film-general-info">
+                <div class="film-background">
+                    <h2>Background</h2>
+                    <p>${film.background}</p>
+                </div>
+                <div class="film-synopsis">
+                    <h2>Synopsis</h2>
+                    <p>${film.synopsis}</p>
+                </div>
+                <div class="video film-video">
+                    <h2>Trailer</h2>
+                    <iframe width="560" height="315" src="${film.trailer.embed_url}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="film-characters">
+                    <!--populate with simple character cards-->
+                </div>
+            </div>
+            <div class="film-detail-info">
+                <p>Japanese Title: <span>${film.title_japanese}</span></p>
+                <p>Romaji Title: <span>${film.title}</span></p>
+                <p>Type: <span>${film.type}</span></p>
+                <p>Duration: <span>${film.duration}</span></p>
+                <p>Episodes: <span>${film.episodes}</span></p>
+                <p>Genres: <span>${film.genres.map(genre => genre.name).join(' , ')}</span></p>
+                <p>Rating: <span>${film.rating}</span></p>
+                <p>Favorites: <span>${film.favorites}</span></p>
+                <p>Score: <span>${film.score}</span></p>
+                <p>Score By: <span>${film.score_by}</span></p>
+                <p>Status: <span>${film.status}</span></p>
+            </div>`;
+        }
 
     }
-}
-
-export function renderDetailedPage(storageVarName, container) {
-    const filmId = getSessionStorage(storageVarName);
-    renderWithTemplate(filmDetailedPageTemplate(filmId), container); 
 }

@@ -62,3 +62,17 @@ export function makeCardClickEvent(cardClass, path, varName) {
         });
     });
 }
+
+// reder detailed film or character pages after click event
+export async function renderDetailedPage(storageVarName, container, data, template) {
+    const allData = await data;
+    const id = Number(getSessionStorage(storageVarName));
+
+    //find movie with the same filmId
+    allData.forEach(data => {
+        if (data.mal_id == id) {
+            renderWithTemplate(template(data), container);
+        }
+    });
+
+}
