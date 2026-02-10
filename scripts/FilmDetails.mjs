@@ -1,4 +1,5 @@
-import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL } from "./utils.mjs";
+import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL, setSessionStorage, getSessionStorage } from "./utils.mjs";
+import { charSimpleCardTemplate } from "./CharacterDetails.mjs";
 
 //Get Character Information. Returns all films in ghibli
 export async function fetchFilmsData() {
@@ -13,7 +14,7 @@ export async function fetchFilmsData() {
     let hasNextPage = true;
 
     while (hasNextPage) {
-        
+
         try {
             const response = await fetch(`${JIKAN_API_URL}/anime?producers=${STUDIO_GHIBLI_ID}&page=${currentPage}`);
 
@@ -89,4 +90,60 @@ export async function displaySimplifiedFilms() {
     allFilms.forEach(film => {
         renderWithTemplate(filmSimpleCardTemplate(film), container);
     });
+
+    makeCardClickEvent(".simpleFilm-card", "./film-detail.html", "film_card_id");
+}
+
+export function filmDetailedPageTemplate(film) {
+    if (!film.title_english) {
+
+        if (!film.trailer.embed_url) {
+            
+        } else {
+            return `
+            <div class="title-heading">
+                <h1>Ghibli Film of the Day</h1>
+                <h2 class="film-title">${film.title_english}<br><span class="film-title-japanese">${film.title_japanese}</span></h2>
+            </div>
+            <div class="film-photos">
+                <figure><img src="" alt=""></figure>
+            </div>
+            <div class="film-general-info">
+                <div class="film-background">
+                    <h2>Background</h2>
+                    <p></p>
+                </div>
+                <div class="film-synopsis">
+                    <h2>Synopsis</h2>
+                    <p></p>
+                </div>
+                <div class="video film-video">
+                    <h2>Trailer</h2>
+                    <iframe src="" frameborder="0"></iframe>
+                </div>
+                <div class="film-characters">
+                    <!--populate with simple character cards-->
+                </div>
+            </div>
+            <div class="film-detail-info">
+                <p>Type: <span></span></p>
+                <p>Duration: <span></span></p>
+                <p>Episodes: <span></span></p>
+                <p>Genres: <span></span></p>
+                <p>Rating: <span></span></p>
+                <p>Popularity: <span></span></p>
+                <p>Score: <span></span></p>
+                <p>Score By: <span></span></p>
+                <p>Status: <span></span></p>
+            </div>`;
+        }
+    }
+    else {
+
+    }
+}
+
+export function renderDetailedPage(storageVarName, container) {
+    const filmId = getSessionStorage(storageVarName);
+    renderWithTemplate(filmDetailedPageTemplate(filmId), container); 
 }
