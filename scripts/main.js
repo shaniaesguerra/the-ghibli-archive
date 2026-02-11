@@ -8,7 +8,7 @@ loadFooter();
 
 //load in data in store in Local Storage -- fetch data only once
 const filmsData = await fetchFilmsData();
-setTimeout(fetchCharIdData, 2000);
+setTimeout(fetchCharIdData, 100);
 
 /************** Ghibli Film of the Day **************/
 //Get just the date today -- YYYY-MM-DD --
