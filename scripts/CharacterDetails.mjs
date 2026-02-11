@@ -1,4 +1,4 @@
-import { renderWithTemplate, JIKAN_API_URL, STUDIO_GHIBLI_URL } from "./utils.mjs";
+import {getLocalStorage, getSessionStorage, setSessionStorage, setLocalStorage, renderWithTemplate, JIKAN_API_URL, STUDIO_GHIBLI_URL, makeCardClickEvent } from "./utils.mjs";
 import { fetchFilmsData } from "./FilmDetails.mjs";
 
 //Get Character Information. Returns all characters in ghibli
@@ -6,9 +6,9 @@ import { fetchFilmsData } from "./FilmDetails.mjs";
 //Fetch CharId Data and return the information
 export async function fetchCharIdData() {
     //Check local storage for data stored:
-    const cached = localStorage.getItem('charID_cache');
+    const cached = getLocalStorage("charID_cache");
     if (cached) {
-        return JSON.parse(cached); //return the stored data
+        return cached; //return the stored data
     }
 
     //else load the data:
@@ -89,7 +89,7 @@ export async function fetchCharIdData() {
     //Use local storage to store results
     //to save time loading
     const charIDs = allCharacters;
-    localStorage.setItem('charID_cache', JSON.stringify(charIDs));
+    setLocalStorage("charID_cache", charIDs);
     return charIDs;
 }
 
@@ -109,4 +109,187 @@ export async function displaySimplifiedChar() {
     allsimpleChar.forEach(char => {
         renderWithTemplate(charSimpleCardTemplate(char), container);
     });
+
+    makeCardClickEvent(".simpleChar-card", "./character-detail.html", "char_card_id");
+}
+
+//Fetch full char id:
+export async function fetchFullCharData(charId) {
+    let charData = null;
+    
+    try {
+        const response = await fetch(`${JIKAN_API_URL}/characters/${charId}/full`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const charJson = await response.json();
+        //console.log(charJson); //for debugging
+
+        //put data in list:
+        charData = charJson.data; //store character data
+
+    }
+    catch (error) {
+        console.error('Error fetching data:', error);
+    }
+
+    return charData;
+}
+
+export function charDetailedPageTemplate(char) {
+    if (!char.title_english) {
+
+        if (!char.trailer.embed_url) {
+            return `
+            <div class="title-heading">
+                <h1 class="char-title">${char.title}<br><span class="char-title-japanese">${char.title_japanese}</span></h1>
+            </div>
+            <div class="char-photos">
+                <figure><img src="${char.images.webp.large_image_url}" alt="${char.title} Movie Poster"></figure>
+            </div>
+            <div class="char-general-info">
+                <div class="char-background">
+                    <h2>Background</h2>
+                    <p>${char.background}</p>
+                </div>
+                <div class="char-synopsis">
+                    <h2>Synopsis</h2>
+                    <p>${char.synopsis}</p>
+                </div>
+                <div class="char-characters">
+                    <h2>Characters</h2>
+                </div>
+            </div>
+            <div class="char-detail-info">
+                <p>Japanese Title: <span>${char.title_japanese}</span></p>
+                <p>Romaji Title: <span>${char.title}</span></p>
+                <p>Type: <span>${char.type}</span></p>
+                <p>Duration: <span>${char.duration}</span></p>
+                <p>Episodes: <span>${char.episodes}</span></p>
+                <p>Genres: <span>${char.genres.map(genre => genre.name).join(' , ')}</span></p>
+                <p>Rating: <span>${char.rating}</span></p>
+                <p>Favorites: <span>${char.favorites}</span></p>
+                <p>Score: <span>${char.score}</span></p>
+                <p>Score By: <span>${char.score_by}</span></p>
+                <p>Status: <span>${char.status}</span></p>
+            </div>`;
+
+        } else {
+            return `
+            <div class="title-heading">
+                <h1 class="char-title">${char.title}<br><span class="char-title-japanese">${char.title_japanese}</span></h1>
+            </div>
+            <div class="char-photos">
+                <figure><img src="${char.images.webp.large_image_url}" alt="${char.title} Movie Poster"></figure>
+            </div>
+            <div class="char-general-info">
+                <div class="char-background">
+                    <h2>Background</h2>
+                    <p>${char.background}</p>
+                </div>
+                <div class="char-synopsis">
+                    <h2>Synopsis</h2>
+                    <p>${char.synopsis}</p>
+                </div>
+                <div class="video char-video">
+                    <h2>Trailer</h2>
+                    <iframe width="560" height="315" src="${char.trailer.embed_url}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="char-characters">
+                    <h2>Characters</h2>
+                </div>
+            </div>
+            <div class="char-detail-info">
+                <p>Japanese Title: <span>${char.title_japanese}</span></p>
+                <p>Romaji Title: <span>${char.title}</span></p>
+                <p>Type: <span>${char.type}</span></p>
+                <p>Duration: <span>${char.duration}</span></p>
+                <p>Episodes: <span>${char.episodes}</span></p>
+                <p>Genres: <span>${char.genres.map(genre => genre.name).join(' , ')}</span></p>
+                <p>Rating: <span>${char.rating}</span></p>
+                <p>Favorites: <span>${char.favorites}</span></p>
+                <p>Score: <span>${char.score}</span></p>
+                <p>Score By: <span>${char.score_by}</span></p>
+                <p>Status: <span>${char.status}</span></p>
+            </div>`;
+        }
+    }
+    else {
+        if (!char.trailer.embed_url) {
+            return `
+            <div class="title-heading">
+                <h1 class="char-title">${char.title_english}<br><span class="char-title-japanese">${char.title_japanese}</span></h1>
+            </div>
+            <div class="char-photos">
+                <figure><img src="${char.images.webp.large_image_url}" alt="${char.title} Movie Poster"></figure>
+            </div>
+            <div class="char-general-info">
+                <div class="char-background">
+                    <h2>Background</h2>
+                    <p>${char.background}</p>
+                </div>
+                <div class="char-synopsis">
+                    <h2>Synopsis</h2>
+                    <p>${char.synopsis}</p>
+                </div>
+                <div class="char-characters">
+                    <h2>Characters</h2>
+                </div>
+            </div>
+            <div class="char-detail-info">
+                <p>Japanese Title: <span>${char.title_japanese}</span></p>
+                <p>Romaji Title: <span>${char.title}</span></p>
+                <p>Type: <span>${char.type}</span></p>
+                <p>Duration: <span>${char.duration}</span></p>
+                <p>Episodes: <span>${char.episodes}</span></p>
+                <p>Genres: <span>${char.genres.map(genre => genre.name).join(' , ')}</span></p>
+                <p>Rating: <span>${char.rating}</span></p>
+                <p>Favorites: <span>${char.favorites}</span></p>
+                <p>Score: <span>${char.score}</span></p>
+                <p>Score By: <span>${char.score_by}</span></p>
+                <p>Status: <span>${char.status}</span></p>
+            </div>`;
+
+        } else {
+            return `
+            <div class="title-heading">
+                <h1 class="char-title">${char.title_english}<br><span class="char-title-japanese">${char.title_japanese}</span></h1>
+            </div>
+            <div class="char-photos">
+                <figure><img src="${char.images.webp.large_image_url}" alt="${char.title} Movie Poster"></figure>
+            </div>
+            <div class="char-general-info">
+                <div class="char-background">
+                    <h2>Background</h2>
+                    <p>${char.background}</p>
+                </div>
+                <div class="char-synopsis">
+                    <h2>Synopsis</h2>
+                    <p>${char.synopsis}</p>
+                </div>
+                <div class="video char-video">
+                    <h2>Trailer</h2>
+                    <iframe width="560" height="315" src="${char.trailer.embed_url}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="character-grid">
+                    <h2>Characters</h2>
+                </div>
+            </div>
+            <div class="char-detail-info">
+                <p>Japanese Title: <span>${char.title_japanese}</span></p>
+                <p>Romaji Title: <span>${char.title}</span></p>
+                <p>Type: <span>${char.type}</span></p>
+                <p>Duration: <span>${char.duration}</span></p>
+                <p>Episodes: <span>${char.episodes}</span></p>
+                <p>Genres: <span>${char.genres.map(genre => genre.name).join(' , ')}</span></p>
+                <p>Rating: <span>${char.rating}</span></p>
+                <p>Favorites: <span>${char.favorites}</span></p>
+                <p>Score: <span>${char.score}</span></p>
+                <p>Score By: <span>${char.score_by}</span></p>
+                <p>Status: <span>${char.status}</span></p>
+            </div>`;
+        }
+
+    }
 }

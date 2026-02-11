@@ -1,12 +1,12 @@
-import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL, setSessionStorage, getSessionStorage, makeCardClickEvent } from "./utils.mjs";
+import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL, setLocalStorage, getLocalStorage, makeCardClickEvent } from "./utils.mjs";
 import { charSimpleCardTemplate } from "./CharacterDetails.mjs";
 
 //Get Character Information. Returns all films in ghibli
 export async function fetchFilmsData() {
     //Check local storage for data stored:
-    const cached = localStorage.getItem('filmsData_cache');
+    const cached = getLocalStorage("filmsData_cache");
     if (cached) {
-        return JSON.parse(cached); //return the stored data
+        return cached; //return the stored data
     }
 
     let currentPage = 1;
@@ -49,7 +49,7 @@ export async function fetchFilmsData() {
     //console.log(allFilms); for debugging
     //to save time loading
     const filmsData = allFilms;
-    localStorage.setItem('filmsData_cache', JSON.stringify(filmsData));
+    setLocalStorage('filmsData_cache', filmsData);
     return filmsData;
 }
 
