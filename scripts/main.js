@@ -54,4 +54,4 @@ for (let i = 0;  i < 10; i++) {
     renderWithTemplate(filmSimpleCardTemplate(sortedPopularityList[i]), popularityContainer);
 }
 
-makeCardClickEvent(".simpleFilm-card", "../films/film-detail.html", "film_card_id");
+makeCardClickEvent(".simpleFilm-card", "./films/film-detail.html", "film_card_id");
