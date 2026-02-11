@@ -183,6 +183,15 @@ input {
     padding-left: 2em;
 }
 
+p {
+    grid-area: paragraph;
+    line-height: 1.5;
+    text-indent: 2em;
+    text-align: left;
+    padding: 0;
+    margin-top: 0;
+}
+
 #sitename{
     text-transform: uppercase;
 }
@@ -320,15 +329,6 @@ input {
         padding: 0 5em 0 5em;
         display: grid;
         align-items: end;
-    }
-
-    & p {
-        grid-area: paragraph;
-        line-height: 1.5;
-        text-indent: 2em;
-        text-align: left;
-        padding: 0;
-        margin-top: 0;
     }
 }
 
@@ -484,12 +484,44 @@ input {
     box-shadow: 0 0 20px var(--background-200);
 }
 
+/***FILM DETAILED PAGE***/
+.detailedFilmPage{
+    display: block;
+    grid-template-areas:
+    " heading heading"
+    " photo   detailinfo"
+    "geninfo  geninfo";
+
+    & .title-heading{
+        grid-area: heading;
+    }
+
+    & .film-photos{
+        grid-area: photo;
+        height: auto;
+        & img{
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    & .film-general-info{
+        grid-area: geninfo;
+    }
+
+    & .film-detail-info{
+        grid-area: detailinfo;
+        align-content: start;
+    }
+}
+
 @media screen and (min-width: 904px) {
 
     .film-grid,
     .character-grid,
     .filmCard-overlay,
     .featureFilm-info,
+    .detailedFilmPage,
     #popularFilms {
         display: grid;
     }

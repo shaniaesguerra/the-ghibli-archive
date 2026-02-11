@@ -105,6 +105,19 @@ export function filmDetailedPageTemplate(film) {
             <div class="film-photos">
                 <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
             </div>
+            <div class="film-detail-info">
+                <p>Japanese Title: <span>${film.title_japanese}</span></p>
+                <p>Romaji Title: <span>${film.title}</span></p>
+                <p>Type: <span>${film.type}</span></p>
+                <p>Duration: <span>${film.duration}</span></p>
+                <p>Episodes: <span>${film.episodes}</span></p>
+                <p>Genres: <span>${film.genres.map(genre => genre.name).join(' , ')}</span></p>
+                <p>Rating: <span>${film.rating}</span></p>
+                <p>Favorites: <span>${film.favorites}</span></p>
+                <p>Score: <span>${film.score}</span></p>
+                <p>Score By: <span>${film.score_by}</span></p>
+                <p>Status: <span>${film.status}</span></p>
+            </div>
             <div class="film-general-info">
                 <div class="film-background">
                     <h2>Background</h2>
@@ -118,6 +131,16 @@ export function filmDetailedPageTemplate(film) {
                     <h2>Characters</h2>
                 </div>
             </div>
+            `;
+
+        } else {
+            return `
+            <div class="title-heading">
+                <h1 class="film-title">${film.title}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
+            </div>
+            <div class="film-photos">
+                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
+            </div>
             <div class="film-detail-info">
                 <p>Japanese Title: <span>${film.title_japanese}</span></p>
                 <p>Romaji Title: <span>${film.title}</span></p>
@@ -130,15 +153,6 @@ export function filmDetailedPageTemplate(film) {
                 <p>Score: <span>${film.score}</span></p>
                 <p>Score By: <span>${film.score_by}</span></p>
                 <p>Status: <span>${film.status}</span></p>
-            </div>`;
-
-        } else {
-            return `
-            <div class="title-heading">
-                <h1 class="film-title">${film.title}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
-            </div>
-            <div class="film-photos">
-                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
             </div>
             <div class="film-general-info">
                 <div class="film-background">
@@ -157,6 +171,18 @@ export function filmDetailedPageTemplate(film) {
                     <h2>Characters</h2>
                 </div>
             </div>
+            `;
+        }
+    }
+    else {
+        if (!film.trailer.embed_url) {
+            return `
+            <div class="title-heading">
+                <h1 class="film-title">${film.title_english}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
+            </div>
+            <div class="film-photos">
+                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
+            </div>
             <div class="film-detail-info">
                 <p>Japanese Title: <span>${film.title_japanese}</span></p>
                 <p>Romaji Title: <span>${film.title}</span></p>
@@ -169,17 +195,6 @@ export function filmDetailedPageTemplate(film) {
                 <p>Score: <span>${film.score}</span></p>
                 <p>Score By: <span>${film.score_by}</span></p>
                 <p>Status: <span>${film.status}</span></p>
-            </div>`;
-        }
-    }
-    else {
-        if (!film.trailer.embed_url) {
-            return `
-            <div class="title-heading">
-                <h1 class="film-title">${film.title_english}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
-            </div>
-            <div class="film-photos">
-                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
             </div>
             <div class="film-general-info">
                 <div class="film-background">
@@ -194,6 +209,16 @@ export function filmDetailedPageTemplate(film) {
                     <h2>Characters</h2>
                 </div>
             </div>
+            `;
+
+        } else {
+            return `
+            <div class="title-heading">
+                <h1 class="film-title">${film.title_english}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
+            </div>
+            <div class="film-photos">
+                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
+            </div>
             <div class="film-detail-info">
                 <p>Japanese Title: <span>${film.title_japanese}</span></p>
                 <p>Romaji Title: <span>${film.title}</span></p>
@@ -206,15 +231,6 @@ export function filmDetailedPageTemplate(film) {
                 <p>Score: <span>${film.score}</span></p>
                 <p>Score By: <span>${film.score_by}</span></p>
                 <p>Status: <span>${film.status}</span></p>
-            </div>`;
-
-        } else {
-            return `
-            <div class="title-heading">
-                <h1 class="film-title">${film.title_english}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
-            </div>
-            <div class="film-photos">
-                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
             </div>
             <div class="film-general-info">
                 <div class="film-background">
@@ -233,19 +249,7 @@ export function filmDetailedPageTemplate(film) {
                     <h2>Characters</h2>
                 </div>
             </div>
-            <div class="film-detail-info">
-                <p>Japanese Title: <span>${film.title_japanese}</span></p>
-                <p>Romaji Title: <span>${film.title}</span></p>
-                <p>Type: <span>${film.type}</span></p>
-                <p>Duration: <span>${film.duration}</span></p>
-                <p>Episodes: <span>${film.episodes}</span></p>
-                <p>Genres: <span>${film.genres.map(genre => genre.name).join(' , ')}</span></p>
-                <p>Rating: <span>${film.rating}</span></p>
-                <p>Favorites: <span>${film.favorites}</span></p>
-                <p>Score: <span>${film.score}</span></p>
-                <p>Score By: <span>${film.score_by}</span></p>
-                <p>Status: <span>${film.status}</span></p>
-            </div>`;
+            `;
         }
 
     }
