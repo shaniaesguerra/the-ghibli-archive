@@ -397,15 +397,15 @@ p {
     }
 
     & .film-rating::before {
-        content: '🍿 ';
+        content: '🍿 Rated ';
     }
 
     & .film-score::before {
-        content: '⭐ ';
+        content: '⭐ Score: ';
     }
 
     & .film-favorites::before {
-        content: '❤️ ';
+        content: '❤️ Favorite: ';
     }
 
 }
@@ -424,19 +424,16 @@ p {
 }
 
 .film-rating {
-    text-align: left;
     display: inline-block;
     grid-area: c;
 }
 
 .film-score {
-    text-align: left;
     display: inline-block;
     grid-area: a;
 }
 
 .film-favorites {
-    text-align: left;
     display: inline-block;
     grid-area: b;
 }
