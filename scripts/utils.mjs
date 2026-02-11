@@ -33,6 +33,15 @@ export async function loadFooter() {
     const templateFooter = await loadTemplate("https://shaniaesguerra.github.io/the-ghibli-archive/partials/footer.html");
     const footer = document.querySelector("#dynamic-footer");
     renderWithTemplate(templateFooter, footer);
+
+    //show current year and last modified date:
+    const year = document.querySelector("#currentyear");
+    const modification = document.querySelector("#lastModified");
+    const today = new Date();
+    const modificationDate = document.lastModified;
+
+    year.innerHTML = `<span id="currentyear">&copy ${today.getFullYear()}</span>`;
+    modification.innerHTML = `<p id="lastModified">Last Modified: ${modificationDate}</p>`;
 }
 
 //Render data on template
