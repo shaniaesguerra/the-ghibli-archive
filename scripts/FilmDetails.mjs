@@ -115,7 +115,7 @@ export function filmDetailedPageTemplate(film) {
                     <p>${film.synopsis}</p>
                 </div>
                 <div class="film-characters">
-                    <!--populate with simple character cards-->
+                    <h2>Characters</h2>
                 </div>
             </div>
             <div class="film-detail-info">
@@ -154,7 +154,7 @@ export function filmDetailedPageTemplate(film) {
                     <iframe width="560" height="315" src="${film.trailer.embed_url}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="film-characters">
-                    <!--populate with simple character cards-->
+                    <h2>Characters</h2>
                 </div>
             </div>
             <div class="film-detail-info">
@@ -191,7 +191,7 @@ export function filmDetailedPageTemplate(film) {
                     <p>${film.synopsis}</p>
                 </div>
                 <div class="film-characters">
-                    <!--populate with simple character cards-->
+                    <h2>Characters</h2>
                 </div>
             </div>
             <div class="film-detail-info">
@@ -229,8 +229,8 @@ export function filmDetailedPageTemplate(film) {
                     <h2>Trailer</h2>
                     <iframe width="560" height="315" src="${film.trailer.embed_url}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <div class="film-characters">
-                    <!--populate with simple character cards-->
+                <div class="character-grid">
+                    <h2>Characters</h2>
                 </div>
             </div>
             <div class="film-detail-info">
