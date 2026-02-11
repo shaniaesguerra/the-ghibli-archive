@@ -1,4 +1,4 @@
-import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL, setLocalStorage, getLocalStorage, makeCardClickEvent } from "./utils.mjs";
+import { renderWithTemplate, STUDIO_GHIBLI_ID, JIKAN_API_URL, setLocalStorage, getLocalStorage, makeFilmCardClickEvent } from "./utils.mjs";
 import { charSimpleCardTemplate } from "./CharacterDetails.mjs";
 
 //Get Character Information. Returns all films in ghibli
@@ -91,7 +91,7 @@ export async function displaySimplifiedFilms() {
         renderWithTemplate(filmSimpleCardTemplate(film), container);
     });
 
-    makeCardClickEvent(".simpleFilm-card", "./film-detail.html", "film_card_id");
+    makeFilmCardClickEvent(".simpleFilm-card", "./film-detail.html", "film_card_id");
 }
 
 export function filmDetailedPageTemplate(film) {

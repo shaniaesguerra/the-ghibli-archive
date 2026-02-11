@@ -60,7 +60,7 @@ export function getRandomNumber(min, max) {
 }
 
 //make card click event for each card
-export function makeCardClickEvent(cardClass, path, varName) {
+export function makeFilmCardClickEvent(cardClass, path, varName) {
     //get all cards:
     const cards = document.querySelectorAll(cardClass);
 
@@ -72,8 +72,21 @@ export function makeCardClickEvent(cardClass, path, varName) {
     });
 }
 
-// reder detailed film or character pages after click event
-export async function renderDetailedPage(storageVarName, container, data, template) {
+//make card click event for each card
+export function makeCharCardClickEvent(cardClass, path, varName) {
+    //get all cards:
+    const cards = document.querySelectorAll(cardClass);
+
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            setSessionStorage(varName, card.dataset.charId);
+            window.location.href = path;
+        });
+    });
+}
+
+// reder detailed film page after click event
+export async function renderFilmDetailedPage(storageVarName, container, data, template) {
     const allData = await data;
     const id = Number(getSessionStorage(storageVarName));
 
@@ -84,4 +97,16 @@ export async function renderDetailedPage(storageVarName, container, data, templa
         }
     });
 
+}
+
+// reder detailed character page after click event
+export async function renderCharDetailedPage(storageVarName, container, data, charId, template) {
+    const allData = await data(charId);
+    const id = Number(getSessionStorage(storageVarName));
+
+    //find movie with the same filmId
+    if (Number(allData.charID) == id) {
+            renderWithTemplate(template(id), container);
+    }
+    
 }

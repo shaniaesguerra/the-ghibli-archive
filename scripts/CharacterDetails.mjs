@@ -1,4 +1,4 @@
-import {getLocalStorage, getSessionStorage, setSessionStorage, setLocalStorage, renderWithTemplate, JIKAN_API_URL, STUDIO_GHIBLI_URL, makeCardClickEvent } from "./utils.mjs";
+import {getLocalStorage, getSessionStorage, setSessionStorage, setLocalStorage, renderWithTemplate, JIKAN_API_URL, STUDIO_GHIBLI_URL, makeCharCardClickEvent } from "./utils.mjs";
 import { fetchFilmsData } from "./FilmDetails.mjs";
 
 //Get Character Information. Returns all characters in ghibli
@@ -95,7 +95,7 @@ export async function fetchCharIdData() {
 
 export function charSimpleCardTemplate(char) {
     return `
-        <div class="simpleChar-card" data-film-id="${char.mal_id}">
+        <div class="simpleChar-card" data-char-id="${char.charID}">
             <img src="${char.photo.image_url}" alt="${char.name}'s Photo">
             <h3>${char.name}</h3>
         </div>`;
@@ -110,7 +110,7 @@ export async function displaySimplifiedChar() {
         renderWithTemplate(charSimpleCardTemplate(char), container);
     });
 
-    makeCardClickEvent(".simpleChar-card", "./character-detail.html", "char_card_id");
+    makeCharCardClickEvent(".simpleChar-card", "./character-detail.html", "char_card_id");
 }
 
 //Fetch full char id:

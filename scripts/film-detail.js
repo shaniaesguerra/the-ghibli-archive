@@ -1,11 +1,11 @@
-import { loadFooter, renderDetailedPage, renderWithTemplate,getSessionStorage } from "./utils.mjs";
+import { loadFooter, renderFilmDetailedPage, renderWithTemplate,getSessionStorage } from "./utils.mjs";
 import {fetchFilmsData, filmDetailedPageTemplate} from "./FilmDetails.mjs";
 import { fetchCharIdData, charSimpleCardTemplate } from "./CharacterDetails.mjs";
 
 loadFooter();
 
 const mainContainer = document.querySelector(".detailedFilmPage");
-renderDetailedPage("film_card_id", mainContainer, fetchFilmsData(), filmDetailedPageTemplate);
+renderFilmDetailedPage("film_card_id", mainContainer, fetchFilmsData(), filmDetailedPageTemplate);
 
 const charData = await fetchCharIdData();
 const charContainer = document.querySelector(".character-grid");
