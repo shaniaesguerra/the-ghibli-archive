@@ -85,7 +85,7 @@ export function makeCharCardClickEvent(cardClass, path, varName) {
     });
 }
 
-// reder detailed film page after click event
+// render detailed film page after click event
 export async function renderFilmDetailedPage(storageVarName, container, data, template) {
     const allData = await data;
     const id = Number(getSessionStorage(storageVarName));
@@ -97,16 +97,4 @@ export async function renderFilmDetailedPage(storageVarName, container, data, te
         }
     });
 
-}
-
-// reder detailed character page after click event
-export async function renderCharDetailedPage(storageVarName, container, data, charId, template) {
-    const allData = await data(charId);
-    const id = Number(getSessionStorage(storageVarName));
-
-    //find movie with the same filmId
-    if (Number(allData.charID) == id) {
-            renderWithTemplate(template(id), container);
-    }
-    
 }
