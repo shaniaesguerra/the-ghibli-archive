@@ -1,7 +1,8 @@
-import { displaySimplifiedChar, fetchCharIdData, fetchFullCharData } from "./CharacterDetails.mjs";
-import { fetchFilmsData } from "./FilmDetails.mjs";
+import { displaySimplifiedChar, fetchCharIdData } from "./CharacterDetails.mjs";
 import { sortByNameAZ, sortByNameZA, sortByPopularityHL, sortByPopularityLH } from "./Sort.mjs";
 import { loadFooter } from "./utils.mjs";
+import { filterCharResults, searchData } from "./Search.mjs";
+
 
 loadFooter();
 // Store the selected elements that we are going to use
@@ -54,3 +55,8 @@ popularityBtnLH.addEventListener("click", () => {
     const list = sortByPopularityLH(charIdData);
     displaySimplifiedChar(list);
 });
+
+/*Search box */
+const searchBox = document.querySelector("#search");
+const searchBtn = document.querySelector("#searchBtn");
+searchData(searchBox, searchBtn, container, charIdData, filterCharResults);

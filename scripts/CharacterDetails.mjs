@@ -109,6 +109,14 @@ export function charSimpleCardTemplate(char) {
 export async function displaySimplifiedChar(data) {
     const allsimpleChar = await data;
     const container = document.querySelector(".character-grid");
+
+    container.innerHTML = "";
+
+    if (allsimpleChar.length === 0) {
+        container.innerHTML = "<h4>No Results found</h4>";
+        return;
+    }
+
     //Render card for each movie
     allsimpleChar.forEach(char => {
         renderWithTemplate(charSimpleCardTemplate(char), container);

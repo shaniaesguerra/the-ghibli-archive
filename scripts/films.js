@@ -1,6 +1,7 @@
 import { loadFooter } from "./utils.mjs";
 import { displaySimplifiedFilms, fetchFilmsData } from "./FilmDetails.mjs";
 import { sortByTitleAZ, sortByTitleZA, sortByDurationLS, sortByDurationSL, sortByReleaseDateON, sortByReleaseDateNO, sortByPopularityHL , sortByPopularityLH} from "./Sort.mjs";
+import { filterFilmResults, searchData} from "./Search.mjs";
 
 loadFooter();
 
@@ -82,3 +83,9 @@ popularBtnLH.addEventListener("click", () => {
     const list = sortByPopularityLH(filmData);
     displaySimplifiedFilms(list);
 })
+
+
+/*Search box */
+const searchBox = document.querySelector("#search");
+const searchBtn = document.querySelector("#searchBtn");
+searchData(searchBox, searchBtn, container, filmData, filterFilmResults);
