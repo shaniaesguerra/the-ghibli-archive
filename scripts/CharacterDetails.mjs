@@ -96,7 +96,7 @@ export async function fetchCharIdData() {
 export function charSimpleCardTemplate(char) {
     return `
         <div class="simpleChar-card" data-char-id="${char.charID}">
-            <img src="${char.photo.image_url}" alt="${char.name}'s Photo">
+            <img src="${char.photo.image_url}" alt="${char.name}'s Photo" loading="lazy">
             <h3>${char.name}</h3>
         </div>`;
 }
@@ -143,7 +143,7 @@ export function charDetailedPageTemplate(char) {
             <h1 class="char-name">${char.name}<br><span class="char-title-japanese">${char.name_kanji}</span></h1>
         </div>
         <div class="char-photos">
-            <figure><img src="${char.images.webp.image_url}" alt="${char.name}'s Photos"></figure>
+            <figure><img src="${char.images.webp.image_url}" alt="${char.name}'s Photos" loading="lazy"></figure>
         </div>
         <div class="char-general-info">
             <div class="char-About">

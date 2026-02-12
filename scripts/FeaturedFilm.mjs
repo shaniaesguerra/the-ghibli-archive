@@ -5,7 +5,7 @@ export function featuredFilmTemplate(film) {
             return `
             <div class="featureFilm-info">
                 <figure>
-                    <img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster">
+                    <img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster" loading="lazy">
                 </figure>
                 <div class="title-heading">
                     <h1>Ghibli Film of the Day</h1>
@@ -19,7 +19,7 @@ export function featuredFilmTemplate(film) {
             return `
             <div class="featureFilm-info">
                 <figure>
-                    <img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster">
+                    <img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster" loading="lazy">
                 </figure>
                 <div class="title-heading">
                     <h1>Ghibli Film of the Day</h1>
@@ -39,7 +39,7 @@ export function featuredFilmTemplate(film) {
             return `
             <div class="featureFilm-info">
                 <figure>
-                    <img src="${film.images.webp.large_image_url}" alt="${film.title_english} Movie Poster">
+                    <img src="${film.images.webp.large_image_url}" alt="${film.title_english} Movie Poster" loading="lazy">
                 </figure>
                 <div class="title-heading">
                     <h1>Ghibli Film of the Day</h1>
@@ -53,7 +53,7 @@ export function featuredFilmTemplate(film) {
             return `
             <div class="featureFilm-info">
                 <figure>
-                    <img src="${film.images.webp.large_image_url}" alt="${film.title_english} Movie Poster">
+                    <img src="${film.images.webp.large_image_url}" alt="${film.title_english} Movie Poster" loading="lazy">
                 </figure>
                 <div class="title-heading">
                     <h1>Ghibli Film of the Day</h1>

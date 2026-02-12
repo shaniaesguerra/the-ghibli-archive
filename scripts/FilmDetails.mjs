@@ -58,7 +58,7 @@ export function filmSimpleCardTemplate(film) {
     if (!film.title_english) {
         return `
         <div class="simpleFilm-card" data-film-id="${film.mal_id}">
-            <img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster">
+            <img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster" loading="lazy">
             <h3>${film.title}</h3>
             <h4>${film.title_japanese}</h4>
             <div class="filmCard-overlay">
@@ -70,7 +70,7 @@ export function filmSimpleCardTemplate(film) {
     } else {
         return `
         <div class="simpleFilm-card" data-film-id="${film.mal_id}">
-            <img src="${film.images.webp.large_image_url}" alt="${film.title}">
+            <img src="${film.images.webp.large_image_url}" alt="${film.title}" loading="lazy">
             <h3>${film.title_english}</h3>
             <h4>${film.title_japanese}</h4>
             <div class="filmCard-overlay">
@@ -103,7 +103,7 @@ export function filmDetailedPageTemplate(film) {
                 <h1 class="film-title">${film.title}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
             </div>
             <div class="film-photos">
-                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
+                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster" loading="lazy"></figure>
             </div>
             <div class="film-detail-info">
                 <p>Japanese Title: <span>${film.title_japanese}</span></p>
@@ -139,7 +139,7 @@ export function filmDetailedPageTemplate(film) {
                 <h1 class="film-title">${film.title}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
             </div>
             <div class="film-photos">
-                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
+                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster" loading="lazy"></figure>
             </div>
             <div class="film-detail-info">
                 <p>Japanese Title: <span>${film.title_japanese}</span></p>
@@ -181,7 +181,7 @@ export function filmDetailedPageTemplate(film) {
                 <h1 class="film-title">${film.title_english}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
             </div>
             <div class="film-photos">
-                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
+                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster" loading="lazy"></figure>
             </div>
             <div class="film-detail-info">
                 <p>Japanese Title: <span>${film.title_japanese}</span></p>
@@ -217,7 +217,7 @@ export function filmDetailedPageTemplate(film) {
                 <h1 class="film-title">${film.title_english}<br><span class="film-title-japanese">${film.title_japanese}</span></h1>
             </div>
             <div class="film-photos">
-                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster"></figure>
+                <figure><img src="${film.images.webp.large_image_url}" alt="${film.title} Movie Poster" loading="lazy"></figure>
             </div>
             <div class="film-detail-info">
                 <p>Japanese Title: <span>${film.title_japanese}</span></p>
