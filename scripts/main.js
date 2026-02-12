@@ -2,7 +2,7 @@ import { loadFooter,getRandomNumber,getLocalStorage, setLocalStorage, renderWith
 import { fetchCharIdData } from "./CharacterDetails.mjs";
 import { fetchFilmsData, filmSimpleCardTemplate} from "./FilmDetails.mjs";
 import { featuredFilmTemplate } from "./FeaturedFilm.mjs";
-import { sortByScore } from "./Sort.mjs";
+import { sortByPopularityHL } from "./Sort.mjs";
 
 loadFooter();
 
@@ -45,7 +45,7 @@ else {
 
 /************** Most Popular Films **************/
 //Sort from highest to lowest popularity 
-const sortedPopularityList = sortByScore(filmsData);
+const sortedPopularityList = sortByPopularityHL(filmsData);
 //console.log(sortedPopularityList); debugging
 const popularityContainer = document.querySelector("#popularFilms");
 

@@ -82,8 +82,8 @@ export function filmSimpleCardTemplate(film) {
     }
 }
 
-export async function displaySimplifiedFilms() {
-    const allFilms = await fetchFilmsData();
+export async function displaySimplifiedFilms(data) {
+    const allFilms = await data;
     const container = document.querySelector(".film-grid");
 
     //Render card for each movie
