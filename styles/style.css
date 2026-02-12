@@ -230,13 +230,13 @@ header {
     padding: 0.5em 1em;
     border-radius: 2em;
     width: 80%;
-    transition: width 0.3s ease;
 }
 
 .navigation ul li:hover {
     width: 90%;
     background-color: var(--secondary-main);
     box-shadow: 0 0 20px var(--secondary-main);
+    transition: all 0.4s ease-in-out;
 }
 
 .navigation a {
@@ -476,7 +476,7 @@ p {
 .simpleFilm-card {
     position: relative;
     cursor: pointer;
-    animation: slideInRight 1s ease-out forwards;
+    animation: slideInLeft 1s ease-out forwards;
 
     & h4 {
         margin-top: 0;
@@ -569,7 +569,7 @@ p {
     flex-direction: column;
     position: relative;
     cursor: pointer;
-    animation: slideInRight 1s ease-out forwards;
+    animation: slideInLeft 1s ease-out forwards;
 }
 
 .simpleChar-card:hover {
