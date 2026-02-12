@@ -61,6 +61,6 @@ popularBtnHL.addEventListener("click", () => {
 
 popularBtnLH.addEventListener("click", () => {
     container.innerHTML = " ";
-    const list = sortByPopularityLH (filmData);
+    const list = sortByPopularityLH(filmData);
     displaySimplifiedFilms(list);
 })

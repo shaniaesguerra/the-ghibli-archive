@@ -1,3 +1,5 @@
+import { fetchFilmsData } from "./FilmDetails.mjs";
+
 export function sortByTitleAZ(filmsData) {
     // From A-Z (ascending alphabetical)
     const sortedList = filmsData.slice().sort((a, b) => {
@@ -29,14 +31,14 @@ export function sortByScoreLH(filmsData) {
     return sortedList;
 }
 
-export function sortByPopularityHL(filmsData) {
+export function sortByPopularityHL(data) {
     //From highest to lowest favorite count
-    const sortedList = filmsData.sort((a, b) => b.favorites - a.favorites);
+    const sortedList = data.sort((a, b) => b.favorites - a.favorites);
     return sortedList;
 }
-export function sortByPopularityLH(filmsData) {
+export function sortByPopularityLH(data) {
     //From lowest to highest favorite count
-    const sortedList = filmsData.sort((a, b) => a.favorites - b.favorites);
+    const sortedList = data.sort((a, b) => a.favorites - b.favorites);
     return sortedList;
 }
 
@@ -96,3 +98,26 @@ export function sortByDurationSL(filmsData) {
     const sortedList = filmsData.sort((a, b) => returnTotalMinutes(b.duration) - returnTotalMinutes(a.duration));
     return sortedList;
 }
+
+/* Character Page Filters */
+export function sortByNameAZ(charData) {
+    // From A-Z (ascending alphabetical)
+    const sortedList = charData.slice().sort((a, b) => {
+        const aName = a.name || "";
+        const bName = b.name || "";
+        return aName.toLowerCase().localeCompare(bName.toLowerCase());  // alphabetical comparison
+    });
+    return sortedList;
+}
+
+export function sortByNameZA(charData) {
+    // From Z-A (descending alphabetical)
+    const sortedList = charData.slice().sort((a, b) => {
+        const aName = a.name || "";
+        const bName = b.name || "";
+        return bName.toLowerCase().localeCompare(aName.toLowerCase());  // reverse comparison
+    });
+    return sortedList;
+}
+
+

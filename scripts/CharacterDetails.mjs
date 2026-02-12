@@ -60,14 +60,15 @@ export async function fetchCharIdData() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const json = await response.json();
-            //console.log(json); debugging
+            //console.log(json); //debugging
 
             if (json.data) {
                 const filmChars = json.data.map(c => ({
                     name: c.character.name.toString(),
                     photo: c.character.images.webp,
                     charID: c.character.mal_id,
-                    filmID: id
+                    filmID: id,
+                    favorites: c.favorites
                 }));
                 
                 filmChars.forEach(fc => {
@@ -84,7 +85,7 @@ export async function fetchCharIdData() {
         }
     }
     
-    //console.log(allCharacters); debugging
+    //console.log(allCharacters);//debugging
 
     //Use local storage to store results
     //to save time loading
@@ -102,8 +103,8 @@ export function charSimpleCardTemplate(char) {
 }
 
 //Get Full Character Data from an id list:
-export async function displaySimplifiedChar() {
-    const allsimpleChar = await fetchCharIdData();
+export async function displaySimplifiedChar(data) {
+    const allsimpleChar = await data;
     const container = document.querySelector(".character-grid");
     //Render card for each movie
     allsimpleChar.forEach(char => {
