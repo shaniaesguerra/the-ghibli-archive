@@ -99,6 +99,9 @@ export function charSimpleCardTemplate(char) {
         <div class="simpleChar-card" data-char-id="${char.charID}">
             <img src="${char.photo.image_url}" alt="${char.name}'s Photo" loading="lazy">
             <h3>${char.name}</h3>
+            <div class="charCard-overlay">
+                <span class="char-favorites">${char.favorites}</span>
+            </div>
         </div>`;
 }
 

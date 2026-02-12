@@ -121,7 +121,8 @@ header {
     column-gap: 0.5em;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid oklch(41.23% 0.009 17.54 / 0.322);;
+    border-bottom: 1px solid oklch(41.23% 0.009 17.54 / 0.322);
+    ;
 }
 
 nav ul {
@@ -140,11 +141,12 @@ nav ul li {
     width: 60%;
 }
 
-nav ul li:hover{
+nav ul li:hover {
     width: 80%;
     background-color: var(--primary-main);
     transition: 0.3s ease-in-out;
     box-shadow: 0 0 20px var(--primary-main);
+
     & a {
         color: var(--text-main);
     }
@@ -192,7 +194,7 @@ p {
     margin-top: 0;
 }
 
-#sitename{
+#sitename {
     text-transform: uppercase;
 }
 
@@ -228,6 +230,7 @@ p {
 .active {
     background-color: var(--secondary-main);
     box-shadow: 0 0 20px var(--secondary-main);
+
     & a {
         color: var(--text-main);
     }
@@ -383,7 +386,8 @@ p {
         margin-top: 0;
         margin-bottom: 0;
     }
-    & img{
+
+    & img {
         box-shadow: 0 0 20px var(--background-200);
     }
 }
@@ -391,8 +395,8 @@ p {
 .simpleFilm-card:hover {
     transform: scale(1.05);
     transition: 0.3s ease-in-out;
-    
-    & img{
+
+    & img {
         box-shadow: 0 0 20px var(--primary-main);
     }
 
@@ -457,19 +461,22 @@ p {
 .simpleChar-card {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    position: relative;
     cursor: pointer;
 }
 
 .simpleChar-card:hover {
     transform: scale(1.05);
-    transition: 0.3s ease-in-out;
-
+        transition: 0.3s ease-in-out;
+    
     & img {
         box-shadow: 0 0 20px var(--primary-main);
     }
+
+    & .char-favorites::before {
+        content: '❤️ Favorite: ';
+    }
+
 }
 
 .simpleChar-card h3 {
@@ -481,32 +488,53 @@ p {
     box-shadow: 0 0 20px var(--background-200);
 }
 
-/***FILM DETAILED PAGE***/
-.detailedFilmPage{
+.charCard-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
     display: block;
     grid-template-areas:
-    " heading heading"
-    " photo   detailinfo"
-    "geninfo  geninfo";
+        ". . c";
+    row-gap: 0.6em;
+    padding: 0.8em;
+}
 
-    & .title-heading{
+.charCard-overlay span {
+    text-align: center;
+    align-content: center;
+    background-color: var(--background-main);
+    border-radius: 2em;
+    padding: 0.3em;
+    font-size: 0.887rem;
+}
+
+/***FILM DETAILED PAGE***/
+.detailedFilmPage {
+    display: block;
+    grid-template-areas:
+        " heading heading"
+        " photo   detailinfo"
+        "geninfo  geninfo";
+
+    & .title-heading {
         grid-area: heading;
     }
 
-    & .film-photos{
+    & .film-photos {
         grid-area: photo;
         height: auto;
-        & img{
+
+        & img {
             width: 100%;
             height: auto;
         }
     }
 
-    & .film-general-info{
+    & .film-general-info {
         grid-area: geninfo;
     }
 
-    & .film-detail-info{
+    & .film-detail-info {
         grid-area: detailinfo;
         align-content: start;
     }
@@ -519,6 +547,7 @@ p {
     .filmCard-overlay,
     .featureFilm-info,
     .detailedFilmPage,
+    .charCard-overlay,
     #popularFilms {
         display: grid;
     }
