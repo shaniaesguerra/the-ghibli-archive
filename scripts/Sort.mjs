@@ -120,4 +120,3 @@ export function sortByNameZA(charData) {
     return sortedList;
 }
 
-

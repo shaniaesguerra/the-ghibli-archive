@@ -7,13 +7,10 @@ loadFooter();
 displaySimplifiedChar(fetchCharIdData());
 
 const charIdData = await fetchCharIdData();
-const filmData = await fetchFilmsData();
 const container = document.querySelector(".character-grid");
 
 const nameBtnAZ = document.querySelector("#filter-nameBtn-AZ");
 const nameBtnZA = document.querySelector("#filter-nameBtn-ZA");
-const movieTitleBtnSL = document.querySelector("#filter-movieTitleBtn-AZ");
-const movieTitleBtnLS = document.querySelector("#filter-movieTitleBtn-ZA");
 const popularityBtnLH = document.querySelector("#filter-popularityBtn-LH");
 const popularityBtnHL = document.querySelector("#filter-popularityBtn-HL");
 
