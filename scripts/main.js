@@ -1,10 +1,26 @@
-import { loadFooter,getRandomNumber,getLocalStorage, setLocalStorage, renderWithTemplate, makeFilmCardClickEvent} from "./utils.mjs";
+import { loadFooter, getRandomNumber, getLocalStorage, setLocalStorage, renderWithTemplate, makeFilmCardClickEvent } from "./utils.mjs";
 import { fetchCharIdData } from "./CharacterDetails.mjs";
-import { fetchFilmsData, filmSimpleCardTemplate} from "./FilmDetails.mjs";
+import { fetchFilmsData, filmSimpleCardTemplate } from "./FilmDetails.mjs";
 import { featuredFilmTemplate } from "./FeaturedFilm.mjs";
 import { sortByPopularityHL } from "./Sort.mjs";
 
 loadFooter();
+// Store the selected elements that we are going to use
+const navbutton = document.querySelector('#ham-btn');
+const navBar = document.querySelector('#nav-bar');
+
+// Toggle the show class off and on
+navbutton.addEventListener('click', () => {
+    navbutton.classList.toggle('show');
+    navBar.classList.toggle('show');
+});
+
+document.querySelectorAll('.navigation a').forEach(link => {
+    link.addEventListener('click', () => {
+        navbutton.classList.remove('show');
+        navBar.classList.remove('show');
+    });
+});
 
 //load in data in store in Local Storage -- fetch data only once
 const filmsData = await fetchFilmsData();
@@ -50,7 +66,7 @@ const sortedPopularityList = sortByPopularityHL(filmsData);
 const popularityContainer = document.querySelector("#popularFilms");
 
 //Get only the top 10 to render on page
-for (let i = 0;  i < 10; i++) {
+for (let i = 0; i < 10; i++) {
     renderWithTemplate(filmSimpleCardTemplate(sortedPopularityList[i]), popularityContainer);
 }
 
