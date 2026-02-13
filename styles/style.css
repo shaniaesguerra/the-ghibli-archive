@@ -609,7 +609,7 @@ p {
 .simpleFilm-card {
     position: relative;
     cursor: pointer;
-    animation: slideInLeft 1s ease-out forwards;
+    animation: slideInRight 1s ease-out forwards;
 
     & h4 {
         margin-top: 0;
@@ -702,7 +702,7 @@ p {
     flex-direction: column;
     position: relative;
     cursor: pointer;
-    animation: slideInLeft 1s ease-out forwards;
+    animation: slideInRight 1s ease-out forwards;
 }
 
 .simpleChar-card:hover {
