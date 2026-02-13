@@ -139,6 +139,12 @@ header {
     font-family: var(--heading-font-family);
     font-weight: var(--heading-font-weight);
     font-size: 1.152rem;
+    
+}
+
+a{
+    text-decoration: none;
+    color: var(--text-main);
 }
 
 .navigation ul {
