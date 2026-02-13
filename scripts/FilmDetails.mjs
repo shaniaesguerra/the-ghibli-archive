@@ -116,6 +116,7 @@ export function filmDetailedPageTemplate(film) {
                 <p>Romaji Title: <span>${film.title}</span></p>
                 <p>Type: <span>${film.type}</span></p>
                 <p>Duration: <span>${film.duration}</span></p>
+                <p>Date Aired: <span>${film.aired.string}</span></p>
                 <p>Episodes: <span>${film.episodes}</span></p>
                 <p>Genres: <span>${film.genres.map(genre => genre.name).join(' , ')}</span></p>
                 <p>Rating: <span>${film.rating}</span></p>
@@ -152,6 +153,7 @@ export function filmDetailedPageTemplate(film) {
                 <p>Romaji Title: <span>${film.title}</span></p>
                 <p>Type: <span>${film.type}</span></p>
                 <p>Duration: <span>${film.duration}</span></p>
+                <p>Date Aired: <span>${film.aired.string}</span></p>
                 <p>Episodes: <span>${film.episodes}</span></p>
                 <p>Genres: <span>${film.genres.map(genre => genre.name).join(' , ')}</span></p>
                 <p>Rating: <span>${film.rating}</span></p>
@@ -194,6 +196,7 @@ export function filmDetailedPageTemplate(film) {
                 <p>Romaji Title: <span>${film.title}</span></p>
                 <p>Type: <span>${film.type}</span></p>
                 <p>Duration: <span>${film.duration}</span></p>
+                <p>Date Aired: <span>${film.aired.string}</span></p>
                 <p>Episodes: <span>${film.episodes}</span></p>
                 <p>Genres: <span>${film.genres.map(genre => genre.name).join(' , ')}</span></p>
                 <p>Rating: <span>${film.rating}</span></p>
@@ -230,6 +233,7 @@ export function filmDetailedPageTemplate(film) {
                 <p>Romaji Title: <span>${film.title}</span></p>
                 <p>Type: <span>${film.type}</span></p>
                 <p>Duration: <span>${film.duration}</span></p>
+                <p>Date Aired: <span>${film.aired.string}</span></p>
                 <p>Episodes: <span>${film.episodes}</span></p>
                 <p>Genres: <span>${film.genres.map(genre => genre.name).join(' , ')}</span></p>
                 <p>Rating: <span>${film.rating}</span></p>
