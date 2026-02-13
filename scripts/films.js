@@ -89,3 +89,11 @@ popularBtnLH.addEventListener("click", () => {
 const searchBox = document.querySelector("#search");
 const searchBtn = document.querySelector("#searchBtn");
 searchData(searchBox, searchBtn, container, filmData, filterFilmResults);
+
+/*Show Filter Buttons*/
+const filterResult = document.querySelector("#filterResult");
+const filterMenu = document.querySelector("#filterMenu");
+
+filterResult.addEventListener('click', function () {
+    filterMenu.classList.toggle('collapsed');
+});

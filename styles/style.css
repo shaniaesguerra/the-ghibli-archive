@@ -139,10 +139,10 @@ header {
     font-family: var(--heading-font-family);
     font-weight: var(--heading-font-weight);
     font-size: 1.152rem;
-    
+
 }
 
-a{
+a {
     text-decoration: none;
     color: var(--text-main);
 }
@@ -534,7 +534,7 @@ p {
         display: flex;
         flex-direction: column;
         row-gap: 1em;
-        padding: 2em ;
+        padding: 2em;
         text-align: left;
         align-items: left;
 
@@ -542,16 +542,68 @@ p {
 
         & button {
             width: 100%;
-            text-align:center;
+            text-align: center;
         }
     }
 
-    & .film-grid , & .character-grid{
+    & .film-grid,
+    & .character-grid {
         grid-area: film-grid;
         border-top: 1px solid oklch(41.23% 0.009 17.54 / 0.322);
         padding-left: 3em;
         padding-top: 2em;
     }
+}
+
+/*Collapsible Filter menu*/
+#filterMenu.collapsed .filterBtn {
+    display: none;
+    /*hide filter buttons*/
+}
+
+.toggle-icon {
+    display: inline-block;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    margin-left: 1em;
+    transition: all 0.3s ease;
+    background: transparent;
+    cursor: pointer;
+    margin: 0 1em;
+}
+
+.toggle-icon::before,
+.toggle-icon::after {
+    content: '';
+    position: absolute;
+    background-color: var(--accent-darker);
+    box-shadow: 0 0 15px var(--accent-darker);
+    transition: all 0.3s ease;
+}
+
+.toggle-icon::before {
+    /* Horizontal line */
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    
+}
+
+.toggle-icon::after {
+    /* Vertical line */
+    width: 2px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#filterMenu:not(.collapsed) .toggle-icon::after {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0);
 }
 
 .simpleFilm-card {
