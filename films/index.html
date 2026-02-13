@@ -35,18 +35,16 @@
         <button id="ham-btn" class="hamburger"></button>
     </header>
     
-    <main>
+    <main class="mainFilmsPage">
         <h1>Films</h1>
         <!--Search Bar-->
         <div class="search-container">
-            <form action="">
-                <input id="search" type="text" placeholder="Search...">
-                <button type="submit" id="searchBtn">🔎︎</button>
-            </form>
+            <input id="search" type="text" placeholder="Search Films">
+            <button type="submit" id="searchBtn">🔎︎</button>
         </div>
         <!--Filter Results-->
-        <span id="filterResult">Filter Results:</span>
         <div id="filterMenu">
+            <span id="filterResult">Filter Results:</span>
             <button class="filterBtn" id="filter-titleBtn-AZ">Title: A-Z</button>
             <button class="filterBtn" id="filter-titleBtn-ZA">Title: Z-A</button>
             <button class="filterBtn" id="filter-rtimeBtn-SL">Running Time: shortest-longest</button>
@@ -56,15 +54,6 @@
             <button class="filterBtn" id="filter-popularityBtn-HL">Popularity: High-Low</button>
             <button class="filterBtn" id="filter-popularityBtn-LH">Popularity: Low-High</button>
         </div>
-        <!--Movie Cards-->
-        <!--Fill with movie cards
-            Template:
-            <div>
-                <img src="" alt="Photo of movie">
-                Details about movie
-                <button>Learm More</button>
-            </div>
-        -->
         <div class="film-grid"></div>
     </main>
     <footer id="dynamic-footer"></footer>
