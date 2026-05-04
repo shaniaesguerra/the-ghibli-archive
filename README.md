@@ -5,3 +5,5 @@ _A web application where users can search information about Studio Ghibli’s an
 - [Studio Ghibli API](https://ghibliapi.dev/)
 - [Jikan API](https://docs.api.jikan.moe/)
 
+# The URL:
+- https://shaniaesguerra.github.io/the-ghibli-archive/
